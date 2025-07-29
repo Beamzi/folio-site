@@ -1,11 +1,45 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Anta,
+  Atomic_Age,
+  Bodoni_Moda,
+  Bruno_Ace_SC,
+  DM_Mono,
+  DM_Serif_Display,
+  Expletus_Sans,
+  Geist,
+  Geist_Mono,
+  Iceland,
+  Kode_Mono,
+  Lexend,
+  Megrim,
+  Notable,
+  Noto_Serif,
+  Nova_Flat,
+  Nova_Mono,
+  Nova_Round,
+  Nova_Square,
+  Play,
+  Sankofa_Display,
+  Sulphur_Point,
+  Syne,
+  Turret_Road,
+  Zen_Dots,
+} from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const googleFontAny = Turret_Road({
+  variable: "--google-font",
+  subsets: ["latin"],
+  // weight: ["800"],
+  weight: ["400"],
+  // weight: ["300", "400", "500"], // or just one: weight: "400"
 });
 
 const geistMono = Geist_Mono({
@@ -26,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${googleFontAny.variable} antialiased`}
       >
         <Header />
 

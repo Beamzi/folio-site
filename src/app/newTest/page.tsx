@@ -13,6 +13,7 @@ import {
 import CubeFace from "@/components/CubeFace";
 import { LiaTabletSolid } from "react-icons/lia";
 import { HiOutlineMagnifyingGlassCircle } from "react-icons/hi2";
+import { BiBrightness } from "react-icons/bi";
 
 const faces = [
   "translate-z-12 rotate-x-0",
@@ -24,10 +25,23 @@ const faces = [
 ];
 
 export default function page() {
+  const [revealKey, setRevealKey] = useState(215);
+  const [textKey, setTextKey] = useState(230);
+
   const wheelScale = useMotionValue(0.5);
   const mouseX = useMotionValue(45);
   const mouseY = useMotionValue(45);
   const wheelUncap = useMotionValue(0.5);
+
+  useEffect(() => {
+    if (revealKey < 250 || textKey < 265) {
+      const resetReveal = setTimeout(() => {
+        setRevealKey((a) => a + 1);
+        setTextKey((a) => a + 1);
+        return clearTimeout(resetReveal);
+      }, 4000);
+    }
+  }, [revealKey, setRevealKey]);
 
   useMotionValueEvent(wheelUncap, "change", (latest) => {
     console.log("wheelscale changed to", latest);
@@ -49,10 +63,10 @@ export default function page() {
   const mouseXMulti = useTransform(mouseX, (value) => Math.ceil(value / 4));
 
   const mouseXMultiColor = useTransform(mouseX, (value) =>
-    Math.max(50, Math.min(250, value / 4))
+    Math.max(100, Math.min(250, value / 4))
   );
 
-  const marqueeColor = useMotionTemplate`rgb(${mouseXMultiColor}, 2, 255)`;
+  const marqueeColor = useMotionTemplate`rgb(${mouseXMultiColor}, 2, 100 )`;
 
   const marquee = useMotionTemplate`-${mouseXMulti}%`;
 
@@ -121,16 +135,69 @@ export default function page() {
 
         <section className="overflow-hidden  whitespace-nowrap w-200">
           <section className="h-full w-full flex border-1 bg-black relative !z-100 justify-center flex-col items-center">
-            <h3 className="tracking-widest border-1 w-200 text-center">
-              A Portfolio By James Day
-            </h3>
-            <motion.p
-              animate={{ x: [-200, 0] }}
-              className="tracking-normal relative !z-100 text-neutral-600"
-            >
-              move your mouse around the space below to change the state of
-              things
-            </motion.p>
+            <div className="border-x-1 border-b-1">
+              <motion.h3
+                animate={{
+                  opacity: [0.5, 1],
+                  filter: ["blur(4px)", "blur(0)"],
+
+                  transition: { duration: 1 },
+                }}
+                className="text-lg py-1 w-200 text-center"
+              >
+                A Portfolio By James Day
+              </motion.h3>
+            </div>
+
+            <div className="relative overflow-hidden">
+              {/* <motion.div
+                key={revealKey}
+                animate={{
+                  x: 520,
+                  boxShadow: [
+                    "0px 0px 20px 20px red",
+                    "0px 0px 20px 20px red",
+                    "0px 0px 0px 0px red",
+                  ],
+                  transition: { duration: 1.5 },
+                }}
+                className="border-l-10 border-red-400/80     text-reveal-extra bg-black z-100 h-full top-0 -right-0 absolute w-full hello"
+              ></motion.div> */}
+
+              <motion.div
+                key={textKey}
+                animate={{
+                  x: 520,
+                  boxShadow: [
+                    "0px 0px 30px 5px red",
+                    "0px 0px 30px 5px red",
+                    "0px 0px 0px 0px red",
+                  ],
+                  // filter: ["brightness(10)", "brightness(1)"],
+                  transition: { duration: 3 },
+                }}
+                className="border-l-3 opacity-70 border-red-400 text-reveal-extra bg-black z-100 h-full top-0 -right-0 absolute w-full hello"
+              ></motion.div>
+
+              <motion.p
+                //  key={textKey}
+                // animate={{
+                //   scaleY: [2, 1],
+                //   x: [10, 0],
+                //   opacity: [0, 0.5, 1],
+                //   filter: ["brightness(10)", "brightness(1)"],
+                //   transition: {
+                //     scaleY: { duration: 0.3 },
+                //     filter: { duration: 0.7 },
+                //     x: { duration: 0.8 },
+                //     opacity: { duration: 0.6 },
+                //   },
+                // }}
+                className="tracking-normal py-1 text-neutral-500 z-11 relative "
+              >
+                Move your mouse around within the space below
+              </motion.p>
+            </div>
           </section>
 
           <motion.div
