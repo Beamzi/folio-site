@@ -28,7 +28,7 @@ const faces = [
   "translate-y-12 -rotate-x-90",
 ];
 
-export default function page() {
+export default function HeroSection() {
   const topWidth = 80;
   const [revealKey, setRevealKey] = useState(215);
   const [textKey, setTextKey] = useState(230);
@@ -121,40 +121,44 @@ export default function page() {
       <section className="h-screen relative flex justify-center items-center">
         <section
           style={{ width: `${topWidth}%` }}
-          className={`overflow-hidden  whitespace-nowrap border-1`}
+          className={`overflow-hidden  whitespace-nowrap   `}
         >
-          <div className="h-full w-full flex border-1 bg-black relative !z-100 justify-center flex-col items-center">
-            <div className="border-x-1 border-b-1 w-full">
+          <div
+            className="h-full py-3 border-1
+           outline-standard w-full flex gradient-for-thin-containers relative  !z-100 justify-center flex-col items-center"
+          >
+            <div className=" border-b-1 !border-dotted border-neutral-800  w-full ">
               <motion.h3
                 animate={{
                   opacity: [0.5, 1],
                   filter: ["blur(4px)", "blur(0)"],
-
-                  transition: { duration: 1 },
+                  transition: {
+                    duration: 1,
+                  },
                 }}
-                className="text-lg py-1 w-full text-center"
+                className="text-lg  w-full text-center"
               >
                 A Portfolio By James Day
               </motion.h3>
             </div>
 
-            <div className="relative overflow-hidden">
+            <div className=" relative overflow-hidden">
               <motion.div
                 key={textKey}
                 animate={{
                   x: 520,
                   boxShadow: [
-                    "0px 0px 30px 5px red",
-                    "0px 0px 30px 5px red",
+                    // "0px 0px 30px 5px red",
+                    "0px 0px 400px 5px red",
                     "0px 0px 0px 0px red",
                   ],
                   // filter: ["brightness(10)", "brightness(1)"],
                   transition: { duration: 3 },
                 }}
-                className="border-l-3 opacity-70 border-red-400 text-reveal-extra bg-black z-100 h-full top-0 -right-0 absolute w-full hello"
+                className=" border-l-3  border-red-400  opacity-90 text-reveal-extra z-100 h-full -top-1 -right-0 absolute w-full "
               ></motion.div>
 
-              <motion.p className="tracking-normal py-1 text-neutral-500 z-11 relative ">
+              <motion.p className="tracking-normal   text-neutral-500 z-11 relative  ">
                 Move your mouse around within the space below
               </motion.p>
             </div>
@@ -173,7 +177,7 @@ export default function page() {
             style={{
               backgroundPosition: template,
             }}
-            className="radial-background w-full h-110 border-1 -mt-3.5  flex justify-center items-center"
+            className="radial-background w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center"
             onMouseMove={(e) => {
               mouseY.set(e.clientY);
               mouseX.set(e.clientX);
@@ -218,7 +222,7 @@ export default function page() {
             </motion.div>
           </motion.div>
 
-          <div className=" left-0 flex flex-row w-full border-1 justify-center">
+          <div className=" left-0 flex flex-row w-full gradient-for-thin-containers justify-center">
             {staticValues.map((item, index) => (
               <button
                 onClick={() => {
@@ -231,10 +235,13 @@ export default function page() {
                 }}
                 onMouseLeave={() => setFaceIndex(10)}
                 key={index}
-                className="face-1 cursor-pointer hover:pr-10 px-2 hover:bg-red-600 transition-all w-1/6 duration-100 py-1 border-1"
+                className={`face-1 cursor-pointer hover:pr-10 px-2 hover:bg-red-600 transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard  border-l-1 ${
+                  index === 5 && "border-r-1"
+                }`}
               >{`face-${index}`}</button>
             ))}
           </div>
+
           <div>
             <StackListMarquee topWidth={topWidth} />
           </div>

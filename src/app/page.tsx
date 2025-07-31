@@ -1,5 +1,6 @@
 "use client";
 
+import HeroSection from "@/components/HeroSection";
 import ScrollingContainer from "@/components/ScrollingContainer";
 
 const firstProjectData = [
@@ -36,6 +37,10 @@ const firstProjectData = [
 export default function page() {
   return (
     <main>
+      <HeroSection></HeroSection>
+
+      {/* 
+
       <section className="h-screen sticky top-0 bg-white"></section>
       <section className="flex justify-center flex-col items-center">
         {firstProjectData.map((item) => (
@@ -48,7 +53,7 @@ export default function page() {
           ></ScrollingContainer>
         ))}
       </section>
-      <section className="h-[400vh]"></section>
+      <section className="h-[400vh]"></section> */}
     </main>
   );
 }
