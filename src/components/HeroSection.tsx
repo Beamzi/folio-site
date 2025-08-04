@@ -32,13 +32,15 @@ export default function HeroSection() {
   const topWidth = 80;
   const [revealKey, setRevealKey] = useState(215);
   const [textKey, setTextKey] = useState(230);
+  const [isCubeFaceClicked, setIsCubeFaceClicked] = useState(false);
+  const [staticMousePosition, setStaticMousePosition] = useState([0, 0]);
+  const [isFaceMenuSticky, setIsFaceMenuSticky] = useState(false);
+  const [menuSpacerHidden, setMenuSpacerHidden] = useState("");
 
   const wheelScale = useMotionValue(0.5);
   const mouseX = useMotionValue(45);
   const mouseY = useMotionValue(45);
   const wheelUncap = useMotionValue(0.5);
-
-  const [staticMousePosition, setStaticMousePosition] = useState([0, 0]);
 
   useEffect(() => {
     if (revealKey < 250 || textKey < 265) {
@@ -93,9 +95,9 @@ export default function HeroSection() {
   };
   const webkitStroke = setWebkitStroke();
 
-  useMotionValueEvent(webkitStroke, "change", (latest) => {
-    console.log("x changed to", latest);
-  });
+  // useMotionValueEvent(webkitStroke, "change", (latest) => {
+  //   console.log("x changed to", latest);
+  // });
 
   const getLettersForMovement = (letter: string) => {
     const letters = Array(1000).fill(letter);
@@ -138,7 +140,7 @@ export default function HeroSection() {
                 }}
                 className="text-lg  w-full text-center"
               >
-                A Portfolio By James Day
+                I'm James Day, Full Stack Developer specializing in Frontend
               </motion.h3>
             </div>
 
@@ -158,7 +160,7 @@ export default function HeroSection() {
                 className=" border-l-3  border-red-400  opacity-90 text-reveal-extra z-100 h-full -top-1 -right-0 absolute w-full "
               ></motion.div>
 
-              <motion.p className="tracking-normal   text-neutral-500 z-11 relative  ">
+              <motion.p className="tracking-normal   text-neutral-500 z-11 relative">
                 Move your mouse around within the space below
               </motion.p>
             </div>
@@ -190,15 +192,18 @@ export default function HeroSection() {
             }}
           >
             <motion.div
-              animate={{
-                rotateX: [mouseX.get(), staticMousePosition[0]],
-                rotateY: [mouseY.get(), staticMousePosition[1]],
-              }}
+              animate={
+                isCubeFaceClicked
+                  ? {
+                      rotateX: [mouseX.get(), staticMousePosition[0]],
+                      rotateY: [mouseY.get(), staticMousePosition[1]],
+                    }
+                  : undefined
+              }
               onWheel={(e) => {
                 const current = wheelScale.get();
                 const delta = e.deltaY / 2000;
                 wheelScale.set(Math.max(0.2, Math.min(2, current + delta)));
-
                 wheelUncap.set(e.deltaY);
               }}
               style={{ rotateX: mouseX, rotateY: mouseY, scale: wheelScale }}
@@ -216,39 +221,71 @@ export default function HeroSection() {
                   mouseX={mouseX}
                   key={item}
                   translateRotate={item}
-                  className="absolute inset-0 border-2 "
+                  className="absolute inset-0 border-2"
                 ></CubeFace>
               ))}
             </motion.div>
           </motion.div>
 
-          <div className=" left-0 flex flex-row w-full gradient-for-thin-containers justify-center">
+          {isFaceMenuSticky && (
+            <motion.div
+              className={`min-h-8 border-1 ${menuSpacerHidden}`}
+            ></motion.div>
+          )}
+
+          <motion.div
+            animate={
+              isFaceMenuSticky
+                ? {
+                    filter: ["blur(100px)", "blur(0px)"],
+                    translateX: [1000, 0],
+                    transition: {
+                      filter: { duration: 0.2 },
+                      translateX: { duration: 0.4 },
+                    },
+                  }
+                : undefined
+            }
+            className={` ${
+              isFaceMenuSticky &&
+              "fixed w-full top-0 z-1000 nav-back-light-shadow flex justify-between  items-center px-10"
+            } left-0 flex flex-row w-full gradient-for-thin-containers justify-center`}
+          >
             {staticValues.map((item, index) => (
               <button
                 onClick={() => {
+                  setIsFaceMenuSticky(true);
+                  setTimeout(() => {
+                    setMenuSpacerHidden("hidden");
+                  }, 1000);
+                  const featureId = document.getElementById(`feature-${index}`);
+                  console.log(featureId);
+                  featureId?.scrollIntoView({ behavior: "smooth" });
                   setFaceIndex(index);
-                  setStaticMousePosition([item[0], item[1]]);
+                  setIsCubeFaceClicked(true);
                   setIsAnimating(false);
+                  setStaticMousePosition([item[0], item[1]]);
                 }}
                 onMouseEnter={() => {
                   setFaceIndex(index);
                 }}
-                onMouseLeave={() => setFaceIndex(10)}
+                onMouseLeave={() => {
+                  setIsCubeFaceClicked(false);
+                  setFaceIndex(10);
+                }}
                 key={index}
                 className={`face-1 cursor-pointer hover:pr-10 px-2 hover:bg-red-600 transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard  border-l-1 ${
                   index === 5 && "border-r-1"
                 }`}
               >{`face-${index}`}</button>
             ))}
-          </div>
-
+          </motion.div>
           <div>
             <StackListMarquee topWidth={topWidth} />
           </div>
         </section>
+        z
       </section>
-
-      <section>asdasdasd</section>
     </>
   );
 }

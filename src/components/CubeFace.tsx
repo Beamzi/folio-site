@@ -47,7 +47,7 @@ export default function CubeFace({
             transition: { duration: 0.2 },
           }}
           style={{ borderRadius: roundedY }}
-          className={`${className} hover:perspective-distant border-neutral-400 outer-face-shadow content-center align-middle   z-10 ${
+          className={`${className} hover:perspective-distant border-neutral-400 outer-face-shadow content-center text-black align-middle   z-10 ${
             index > 1 && ""
           } ${translateRotate} ${
             faceIndex === index
