@@ -1,5 +1,6 @@
 "use client";
-import React, { useRef, useState } from "react";
+
+import React, { SetStateAction, useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -11,33 +12,45 @@ export default function SingleFeature({
   content,
   src,
   alt,
-  index,
+  btnIndex,
   isScrollInEffect,
   className,
   id,
   details,
+  expandSection,
+  setExpandSection,
+  setActiveSection,
+  activeSection,
 }: {
   title: string;
   content: string;
   src: string;
   alt: string;
-  index: number;
+  btnIndex: number;
   isScrollInEffect?: boolean;
   className?: string;
   id?: string;
   details?: string[] | undefined;
+  expandSection: boolean;
+  setExpandSection: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveSection: React.Dispatch<React.SetStateAction<number>>;
+  activeSection: number;
 }) {
-  const [expandSection, setExpandSection] = useState(false);
+  const [localExpandSection, setLocalExpandSection] = useState(false);
 
-  const ref = useRef(null);
+  const [refreshRef, setRefreshRef] = useState(0);
+
+  const [localBtnIndex, setLocalBtnIndex] = useState(10);
+
+  const ref = useRef<HTMLDivElement>(null);
+  const refNew = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end end"],
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log("x changed to:", latest);
-  });
+  // useEffect(() => {}, [expandSection]);
 
   return (
     <motion.div
@@ -52,31 +65,48 @@ export default function SingleFeature({
       }
       ref={ref}
       style={isScrollInEffect ? { scale: scrollYProgress } : undefined}
-      className={`${className}  flex flex-col relative items-center w-full h-full`}
+      className={`${className} 
+
+       flex flex-col relative  items-center w-full h-full`}
     >
       <div id={id} className="spacer min-h-15 w-full "></div>
-      <section
-        // initial={{ opacity: 1 }}
-        // animate={expandSection && isScrollInEffect ? { opacity: 0 } : undefined}
-        // id={`feature-${index}`}
-        className="flex flex-row  w-[80%] border-1 "
-      >
+      <section className="flex flex-row  w-[80%] border-1 ">
         <div className="w-1/2 p-5 h-full   ">
           <h3>{title}</h3>
           <p>{content}</p>
-          <button onClick={() => setExpandSection(true)} className="border-1">
+
+          <button
+            onClick={() => {
+              console.log("asdsd");
+              // setLocalBtnIndex(btnIndex);
+              setActiveSection(btnIndex);
+              setExpandSection(true);
+              setTimeout(() => {
+                if (activeSection === btnIndex) {
+                  setExpandSection(expandSection ? false : true);
+                }
+              });
+            }}
+            className="border-1"
+          >
             See Details
           </button>
-          {expandSection &&
-            details?.map((item, index) => <li key={43434 + index}>{item}</li>)}
+
+          {activeSection === btnIndex && expandSection === true && (
+            <ul>
+              {details?.map((item, index) => (
+                <li key={43434 + index}>{item}</li>
+              ))}
+            </ul>
+          )}
         </div>
-        <div className="w-1/2 h-full">
-          <img
+        <div className="w-1/2 max-h-20">
+          {/* <img
             style={{ objectFit: "cover" }}
             className="w-full h-full"
             src={src}
             alt={alt}
-          ></img>
+          ></img> */}
         </div>
       </section>
     </motion.div>

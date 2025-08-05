@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import SingleFeature from "./SingleFeature";
 
@@ -87,40 +89,95 @@ const manaboardProjectData = [
   },
 ];
 
-const getFeatureList = () => {
-  let arr = [];
-  for (let i = 0; i < 2; i++) {
-    let list = manaboardProjectData.map((item, index) => (
-      <SingleFeature
-        key={i === 0 ? 8456 + index : 9862 + index}
-        title={item.title}
-        content={item.content}
-        src={item.src}
-        alt={item.alt}
-        index={index}
-        isScrollInEffect={i === 0 ? true : false}
-        id={i == 0 ? "" : `feature-${index}`}
-        details={item.details}
-      ></SingleFeature>
-    ));
-    i === 0
-      ? arr.push(list)
-      : arr.push(
-          <div key={431242} className="absolute top-0 left-0 ">
-            {list}
-          </div>
-        );
-  }
-  return arr;
-};
+interface Props {
+  expandSection: boolean;
+  setExpandSection: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+// const getFeatureList = ({ expandSection, setExpandSection }: Props) => {
+//   let arr = [];
+//   for (let i = 0; i < 2; i++) {
+//     let list = manaboardProjectData.map((item, index) => (
+//       <SingleFeature
+//         expandSection={expandSection}
+//         setExpandSection={setExpandSection}
+//         key={i === 0 ? 8456 + index : 9862 + index}
+//         title={item.title}
+//         content={item.content}
+//         src={item.src}
+//         alt={item.alt}
+//         btnIndex={index}
+//         isScrollInEffect={i === 0 ? true : false}
+//         id={i == 0 ? "" : `feature-${index}`}
+//         details={item.details}
+//       ></SingleFeature>
+//     ));
+//     i === 0
+//       ? arr.push(list)
+//       : arr.push(
+//           <div
+//             key={431242}
+//             className="absolute top-0 left-0 pointer-events-none "
+//           >
+//             {list}
+//           </div>
+//         );
+//   }
+//   return arr;
+// };
 
 export default function ManaboardFeatureSection() {
-  const featureList = getFeatureList();
+  const [expandSection, setExpandSection] = useState(true);
+
+  const [activeSection, setActiveSection] = useState(10);
+
+  const [refreshKey, setRefreshKey] = useState(23242);
 
   return (
     <>
       <article className="min-h-30000 flex border-1 flex-col items-center relative">
-        {featureList}
+        {manaboardProjectData.map((item, index) => {
+          return (
+            <SingleFeature
+              expandSection={expandSection}
+              setExpandSection={setExpandSection}
+              setActiveSection={setActiveSection}
+              activeSection={activeSection}
+              key={refreshKey + index}
+              title={item.title}
+              content={item.content}
+              src={item.src}
+              alt={item.alt}
+              btnIndex={index}
+              isScrollInEffect={true}
+              // id={`feature-${index}`}
+              details={item.details}
+            ></SingleFeature>
+          );
+        })}
+
+        <div className="absolute flex flex-col items-center justify-center w-full ">
+          {manaboardProjectData.map((item, index) => {
+            return (
+              <SingleFeature
+                expandSection={expandSection}
+                setExpandSection={setExpandSection}
+                setActiveSection={setActiveSection}
+                activeSection={activeSection}
+                key={refreshKey + index}
+                title={item.title}
+                content={item.content}
+                src={item.src}
+                alt={item.alt}
+                btnIndex={index}
+                isScrollInEffect={false}
+                id={`feature-${index}`}
+                details={item.details}
+              ></SingleFeature>
+            );
+          })}
+        </div>
+        {/* {getFeatureList({ expandSection, setExpandSection })} */}
       </article>
     </>
   );
