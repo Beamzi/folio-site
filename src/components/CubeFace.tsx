@@ -55,7 +55,12 @@ export default function CubeFace({
               : "bg-neutral-500/30"
           }`}
         >
-          {faceIndex === index && `face-${index}`}
+          <h3 className="text-black scale-70">
+            {faceIndex === index && `Manaboard`}
+          </h3>
+          <p className="text-black text-xs scale-70">
+            {faceIndex === index && `Feature-${index}`}
+          </p>
         </motion.div>
       }
     </>

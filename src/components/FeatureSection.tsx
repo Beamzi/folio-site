@@ -126,7 +126,7 @@ interface Props {
 //   return arr;
 // };
 
-export default function ManaboardFeatureSection() {
+export default function FeatureSection() {
   const [expandSection, setExpandSection] = useState(true);
 
   const [activeSection, setActiveSection] = useState(10);

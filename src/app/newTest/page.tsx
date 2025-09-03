@@ -218,7 +218,7 @@ export default function page() {
             </motion.div>
           </motion.div>
 
-          <div className=" left-0 flex flex-row w-full border-1 justify-center">
+          <div className="left-0 flex flex-row w-full border-1 justify-center">
             {staticValues.map((item, index) => (
               <button
                 onClick={() => {

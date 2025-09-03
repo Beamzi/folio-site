@@ -123,7 +123,7 @@ export default function HeroSection() {
       <section className="h-screen relative flex justify-center items-center">
         <section
           style={{ width: `${topWidth}%` }}
-          className={`overflow-hidden  whitespace-nowrap   `}
+          className={`overflow-hidden whitespace-nowrap`}
         >
           <div
             className="h-full py-3 border-1
@@ -144,7 +144,7 @@ export default function HeroSection() {
               </motion.h3>
             </div>
 
-            <div className=" relative overflow-hidden">
+            <div className="relative overflow-hidden">
               <motion.div
                 key={textKey}
                 animate={{
@@ -178,9 +178,15 @@ export default function HeroSection() {
           <motion.div
             style={{
               backgroundPosition: template,
+              // pointerEvents: isCubeFaceClicked ? "none" : "auto",
             }}
-            className="radial-background w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center"
+            className={`radial-background w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center`}
             onMouseMove={(e) => {
+              if (isCubeFaceClicked) {
+                console.log("should return early");
+                return;
+              }
+
               mouseY.set(e.clientY);
               mouseX.set(e.clientX);
             }}
@@ -189,6 +195,11 @@ export default function HeroSection() {
             }}
             onMouseLeave={() => {
               setIsAnimating(true);
+              console.log("hello");
+              setTimeout(() => {
+                setIsCubeFaceClicked(false);
+                setFaceIndex(10);
+              }, 0);
             }}
           >
             <motion.div
@@ -206,7 +217,11 @@ export default function HeroSection() {
                 wheelScale.set(Math.max(0.2, Math.min(2, current + delta)));
                 wheelUncap.set(e.deltaY);
               }}
-              style={{ rotateX: mouseX, rotateY: mouseY, scale: wheelScale }}
+              style={{
+                rotateX: isCubeFaceClicked ? staticMousePosition[0] : mouseX,
+                rotateY: isCubeFaceClicked ? staticMousePosition[1] : mouseY,
+                scale: wheelScale,
+              }}
               className={`relative scale-200 ${
                 isAnimating ? "init-animation" : "scale-400"
               }   size-20 transform-3d rotate-x-45 rotate-y-45 `}
@@ -254,37 +269,37 @@ export default function HeroSection() {
             {staticValues.map((item, index) => (
               <button
                 onClick={() => {
-                  setIsFaceMenuSticky(true);
-                  setTimeout(() => {
-                    setMenuSpacerHidden("hidden");
-                  }, 1000);
-                  const featureId = document.getElementById(`feature-${index}`);
-                  console.log(featureId);
-                  featureId?.scrollIntoView({ behavior: "smooth" });
+                  // setIsFaceMenuSticky(true);
+                  // setTimeout(() => {
+                  //   setMenuSpacerHidden("hidden");
+                  // }, 1000);
+                  // const featureId = document.getElementById(`feature-${index}`);
+                  // featureId?.scrollIntoView({ behavior: "smooth" });
                   setFaceIndex(index);
                   setIsCubeFaceClicked(true);
                   setIsAnimating(false);
                   setStaticMousePosition([item[0], item[1]]);
+
+                  setTimeout(() => setIsCubeFaceClicked(true), 0);
                 }}
                 onMouseEnter={() => {
                   setFaceIndex(index);
                 }}
                 onMouseLeave={() => {
-                  setIsCubeFaceClicked(false);
-                  setFaceIndex(10);
+                  // setIsCubeFaceClicked(false);
+                  // setFaceIndex(10);
                 }}
                 key={index}
-                className={`face-1 cursor-pointer hover:pr-10 px-2 hover:bg-red-600 transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard  border-l-1 ${
+                className={`face-1 cursor-pointer hover:pr-10 px-2 hover:bg-red-600 transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard border-l-1 ${
                   index === 5 && "border-r-1"
                 }`}
-              >{`face-${index}`}</button>
+              >{`Feature-${index + 1}`}</button>
             ))}
           </motion.div>
           <div>
             <StackListMarquee topWidth={topWidth} />
           </div>
         </section>
-        z
       </section>
     </>
   );

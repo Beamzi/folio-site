@@ -100,13 +100,13 @@ export default function SingleFeature({
             </ul>
           )}
         </div>
-        <div className="w-1/2 max-h-20">
-          {/* <img
+        <div className="w-1/2 ">
+          <img
             style={{ objectFit: "cover" }}
             className="w-full h-full"
             src={src}
             alt={alt}
-          ></img> */}
+          ></img>
         </div>
       </section>
     </motion.div>
