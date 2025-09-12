@@ -60,12 +60,12 @@ export default function HeroSection() {
   const [faceIndex, setFaceIndex] = useState(10);
   const [isAnimating, setIsAnimating] = useState(true);
   const staticValues = [
-    [349, 393],
-    [350, 350],
-    [340, 240],
-    [380, 460],
-    [241, 340],
-    [480, 380],
+    [360, 360],
+    [360, 360],
+    [360, 270],
+    [360, 450],
+    [270, 360],
+    [450, 360],
   ];
 
   const template = useMotionTemplate`${wheelUncap}% 20%`;
@@ -99,6 +99,10 @@ export default function HeroSection() {
   //   console.log("x changed to", latest);
   // });
 
+  const scaleXAfterCubeClick = useTransform(() =>
+    typeof window !== "undefined" ? (window.innerWidth * 0.8) / 200 : 1
+  );
+
   const getLettersForMovement = (letter: string) => {
     const letters = Array(1000).fill(letter);
     const spans = [];
@@ -120,7 +124,7 @@ export default function HeroSection() {
   };
   return (
     <>
-      <section className="h-screen relative flex justify-center items-center">
+      <section className="h-screen relative  flex justify-center items-center">
         <section
           style={{ width: `${topWidth}%` }}
           className={`overflow-hidden whitespace-nowrap`}
@@ -180,7 +184,7 @@ export default function HeroSection() {
               backgroundPosition: template,
               // pointerEvents: isCubeFaceClicked ? "none" : "auto",
             }}
-            className={`radial-background w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center`}
+            className={`radial-background  w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center`}
             onMouseMove={(e) => {
               if (isCubeFaceClicked) {
                 console.log("should return early");
@@ -195,13 +199,32 @@ export default function HeroSection() {
             }}
             onMouseLeave={() => {
               setIsAnimating(true);
-              console.log("hello");
               setTimeout(() => {
                 setIsCubeFaceClicked(false);
                 setFaceIndex(10);
               }, 0);
             }}
           >
+            {isCubeFaceClicked && (
+              <motion.div
+                animate={{
+                  opacity: [0, 1],
+                  scale: [0, 1],
+                  scaleX: [1, scaleXAfterCubeClick.get()],
+                  scaleY: [1, 2],
+                  transition: {
+                    scaleX: { delay: 1, duration: 0.5 },
+                    scaleY: { delay: 1.5, duration: 0.5 },
+                    scale: { delay: 0.3, duration: 0.5 },
+                    opacity: { delay: 0.3, duration: 0.5 },
+                  },
+                }}
+                // transition={{ delay: 0.3, duration: 0.5 }}
+                className={`size-40 bg-black border-1 border-white z-100 absolute ${
+                  isCubeFaceClicked ? "opacity-0" : "opacity-1"
+                }`}
+              ></motion.div>
+            )}
             <motion.div
               animate={
                 isCubeFaceClicked
@@ -211,6 +234,7 @@ export default function HeroSection() {
                     }
                   : undefined
               }
+              transition={{ duration: 0.6 }}
               onWheel={(e) => {
                 const current = wheelScale.get();
                 const delta = e.deltaY / 2000;
@@ -234,6 +258,7 @@ export default function HeroSection() {
                   index={index}
                   mouseY={mouseY}
                   mouseX={mouseX}
+                  isCubeFaceClicked={isCubeFaceClicked}
                   key={item}
                   translateRotate={item}
                   className="absolute inset-0 border-2"
@@ -276,7 +301,7 @@ export default function HeroSection() {
                   // const featureId = document.getElementById(`feature-${index}`);
                   // featureId?.scrollIntoView({ behavior: "smooth" });
                   setFaceIndex(index);
-                  setIsCubeFaceClicked(true);
+                  setIsCubeFaceClicked(false);
                   setIsAnimating(false);
                   setStaticMousePosition([item[0], item[1]]);
 

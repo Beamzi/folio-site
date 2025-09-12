@@ -17,6 +17,7 @@ interface Props {
   mouseX: MotionValue<number>;
   setSwitchFace: (value: boolean) => void;
   switchFace: boolean;
+  isCubeFaceClicked: boolean;
   faceIndex: number;
   index: number;
   style?: {
@@ -33,36 +34,37 @@ export default function CubeFace({
   mouseX,
   switchFace,
   index,
+  isCubeFaceClicked,
 }: Props) {
   const roundedX = useTransform(mouseX, [300, 400], [0, 100]);
   const roundedY = useTransform(mouseY, [120, 500], [0, 100]);
 
   return (
     <>
-      {
-        <motion.div
-          whileHover={{
-            margin: 2,
-            // backgroundColor: "red",
-            transition: { duration: 0.2 },
-          }}
-          style={{ borderRadius: roundedY }}
-          className={`${className} hover:perspective-distant border-neutral-400 outer-face-shadow content-center text-black align-middle   z-10 ${
-            index > 1 && ""
-          } ${translateRotate} ${
-            faceIndex === index
-              ? "bg-emerald-300 transition-all duration-100  scale-120 face-hover "
-              : "bg-neutral-500/30"
-          }`}
-        >
-          <h3 className="text-black scale-70">
-            {faceIndex === index && `Manaboard`}
-          </h3>
-          <p className="text-black text-xs scale-70">
-            {faceIndex === index && `Feature-${index}`}
-          </p>
-        </motion.div>
-      }
+      <motion.div
+        whileHover={{
+          margin: 2,
+          // backgroundColor: "red",
+          transition: { duration: 0.2 },
+        }}
+        style={{
+          borderRadius: roundedY,
+        }}
+        className={`${className} hover:perspective-distant border-neutral-400 outer-face-shadow content-center text-black align-middle z-10 ${
+          index > 1 && ""
+        } ${translateRotate} ${
+          faceIndex === index
+            ? "bg-emerald-300 transition-all   face-hover "
+            : "bg-neutral-500/30"
+        }`}
+      >
+        <h3 className="text-black scale-70">
+          {faceIndex === index && `Manaboard`}
+        </h3>
+        <p className="text-black text-xs scale-70">
+          {faceIndex === index && `Feature-${index}`}
+        </p>
+      </motion.div>
     </>
   );
 }
