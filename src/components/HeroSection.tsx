@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { DiJsBadge } from "react-icons/di";
+import { manaboardProjectData } from "@/data/manaboard-project-data";
 
 import {
   easeInOut,
@@ -18,6 +19,8 @@ import { LiaTabletSolid } from "react-icons/lia";
 import { HiOutlineMagnifyingGlassCircle } from "react-icons/hi2";
 import { BiBrightness } from "react-icons/bi";
 import StackListMarquee from "@/components/StackListMarquee";
+import SingleFeature from "./SingleFeature";
+import CubeFeatureSection from "./CubeFeatureSection";
 
 const faces = [
   "translate-z-12 rotate-x-0",
@@ -36,6 +39,11 @@ export default function HeroSection() {
   const [staticMousePosition, setStaticMousePosition] = useState([0, 0]);
   const [isFaceMenuSticky, setIsFaceMenuSticky] = useState(false);
   const [menuSpacerHidden, setMenuSpacerHidden] = useState("");
+  const [switchFace, setSwitchFace] = useState(true);
+  const [faceIndex, setFaceIndex] = useState(10);
+  const [isAnimating, setIsAnimating] = useState(true);
+
+  const currentFeature = manaboardProjectData[faceIndex];
 
   const wheelScale = useMotionValue(0.5);
   const mouseX = useMotionValue(45);
@@ -56,9 +64,6 @@ export default function HeroSection() {
     console.log("wheelscale changed to", latest);
   });
 
-  const [switchFace, setSwitchFace] = useState(true);
-  const [faceIndex, setFaceIndex] = useState(10);
-  const [isAnimating, setIsAnimating] = useState(true);
   const staticValues = [
     [360, 360],
     [360, 360],
@@ -184,7 +189,7 @@ export default function HeroSection() {
               backgroundPosition: template,
               // pointerEvents: isCubeFaceClicked ? "none" : "auto",
             }}
-            className={`radial-background  w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center`}
+            className={`radial-background  w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center relative`}
             onMouseMove={(e) => {
               if (isCubeFaceClicked) {
                 console.log("should return early");
@@ -206,25 +211,38 @@ export default function HeroSection() {
             }}
           >
             {isCubeFaceClicked && (
-              <motion.div
-                animate={{
-                  opacity: [0, 1],
-                  scale: [0, 1],
-                  scaleX: [1, scaleXAfterCubeClick.get()],
-                  scaleY: [1, 2],
-                  transition: {
-                    scaleX: { delay: 1, duration: 0.5 },
-                    scaleY: { delay: 1.5, duration: 0.5 },
-                    scale: { delay: 0.3, duration: 0.5 },
-                    opacity: { delay: 0.3, duration: 0.5 },
-                  },
-                }}
-                // transition={{ delay: 0.3, duration: 0.5 }}
-                className={`size-40 bg-black border-1 border-white z-100 absolute ${
-                  isCubeFaceClicked ? "opacity-0" : "opacity-1"
-                }`}
-              ></motion.div>
+              <>
+                <motion.div
+                  animate={{
+                    opacity: [0, 1],
+                    scale: [0, 1],
+                    scaleX: [1, scaleXAfterCubeClick.get()],
+                    scaleY: [1, 2],
+                    transition: {
+                      scaleX: { delay: 1, duration: 0.5 },
+                      scaleY: { delay: 1.5, duration: 0.5 },
+                      scale: { delay: 0.3, duration: 0.5 },
+                      opacity: { delay: 0.3, duration: 1.2 },
+                    },
+                  }}
+                  // transition={{ delay: 0.3, duration: 0.5 }}
+                  className={`size-40 bg-black border-1 border-white z-100 absolute ${
+                    isCubeFaceClicked ? "opacity-0" : "opacity-1"
+                  }`}
+                ></motion.div>
+                <CubeFeatureSection
+                  className={`absolute z-10000 h-[65%] w-[80%]  ${
+                    isCubeFaceClicked ? "opacity-0" : "opacity-1"
+                  } `}
+                  title={currentFeature.title}
+                  content={currentFeature.content}
+                  details={currentFeature.details}
+                  src={currentFeature.src}
+                  alt={currentFeature.alt}
+                />
+              </>
             )}
+
             <motion.div
               animate={
                 isCubeFaceClicked
