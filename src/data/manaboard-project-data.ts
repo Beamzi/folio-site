@@ -24,7 +24,6 @@ export const manaboardProjectData = [
       "Activity Streams - Chronological display of project conversations and updates",
       "Project Comments - Threaded conversation system attached to individual projects",
       "Real-Time Updates - Instant synchronization across all connected clients",
-      "",
     ],
   },
   {

@@ -33,6 +33,7 @@ const faces = [
 
 export default function HeroSection() {
   const topWidth = 80;
+  const topHeight = 80;
   const [revealKey, setRevealKey] = useState(215);
   const [textKey, setTextKey] = useState(230);
   const [isCubeFaceClicked, setIsCubeFaceClicked] = useState(false);
@@ -105,7 +106,11 @@ export default function HeroSection() {
   // });
 
   const scaleXAfterCubeClick = useTransform(() =>
-    typeof window !== "undefined" ? (window.innerWidth * 0.8) / 200 : 1
+    typeof window !== "undefined" ? (window.innerWidth * 0.7) / 200 : 1
+  );
+
+  const scaleYAfterCubeClick = useTransform(() =>
+    typeof window !== "undefined" ? (window.innerHeight * 0.7) / 200 : 1
   );
 
   const getLettersForMovement = (letter: string) => {
@@ -129,17 +134,17 @@ export default function HeroSection() {
   };
   return (
     <>
-      <section className="h-screen relative  flex justify-center items-center">
+      <section className="h-screen relative flex justify-center items-center">
         <section
           style={{ width: `${topWidth}%` }}
-          className={`overflow-hidden whitespace-nowrap`}
+          className={`overflow-hidden whitespace-nowrap min-h-0 `}
         >
           <div
-            className="h-full py-3 border-1
+            className="h-full min-h-0 py-3 border-1
            outline-standard w-full flex gradient-for-thin-containers relative  !z-100 justify-center flex-col items-center"
           >
-            <div className=" border-b-1 !border-dotted border-neutral-800  w-full ">
-              <motion.h3
+            <div className=" border-b-1 min-h-0 !border-dotted border-neutral-800  w-full flex items-center content-center align-middle justify-center ">
+              <motion.div
                 animate={{
                   opacity: [0.5, 1],
                   filter: ["blur(4px)", "blur(0)"],
@@ -147,10 +152,13 @@ export default function HeroSection() {
                     duration: 1,
                   },
                 }}
-                className="text-lg  w-full text-center"
+                className="flex justify-center items-center "
               >
-                I'm James Day, Full Stack Developer specializing in Frontend
-              </motion.h3>
+                <img src="/logo/2.svg" className="w-7 h-7 mx-1 "></img>
+                <motion.h3 className="text-lg  w-full text-center">
+                  The Manaboard Cube, My latest Project Showcase
+                </motion.h3>
+              </motion.div>
             </div>
 
             <div className="relative overflow-hidden">
@@ -170,7 +178,7 @@ export default function HeroSection() {
               ></motion.div>
 
               <motion.p className="tracking-normal   text-neutral-500 z-11 relative">
-                Move your mouse around within the space below
+                Move your mouse within the space below
               </motion.p>
             </div>
           </div>
@@ -183,13 +191,13 @@ export default function HeroSection() {
           >
             {getLettersForMovement("I")}
           </motion.div>
-
+          {/* problema area */}
           <motion.div
             style={{
               backgroundPosition: template,
               // pointerEvents: isCubeFaceClicked ? "none" : "auto",
             }}
-            className={`radial-background  w-full h-110 border-1 -mt-3.5 outline-standard flex justify-center items-center relative`}
+            className={`radial-background  w-full h-[70vh] flex-col min-h-0 border-1 -mt-3.5 outline-standard flex justify-center items-center relative`}
             onMouseMove={(e) => {
               if (isCubeFaceClicked) {
                 console.log("should return early");
@@ -217,7 +225,7 @@ export default function HeroSection() {
                     opacity: [0, 1],
                     scale: [0, 1],
                     scaleX: [1, scaleXAfterCubeClick.get()],
-                    scaleY: [1, 2],
+                    scaleY: [1, scaleYAfterCubeClick.get()],
                     transition: {
                       scaleX: { delay: 1, duration: 0.5 },
                       scaleY: { delay: 1.5, duration: 0.5 },
@@ -231,7 +239,7 @@ export default function HeroSection() {
                   }`}
                 ></motion.div>
                 <CubeFeatureSection
-                  className={`absolute z-10000 h-[65%] w-[80%]  ${
+                  className={`absolute z-10000 h-[80%] min-h-0 w-[70%]  ${
                     isCubeFaceClicked ? "opacity-0" : "opacity-1"
                   } `}
                   title={currentFeature.title}
