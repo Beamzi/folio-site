@@ -5,6 +5,7 @@ import { DiJsBadge } from "react-icons/di";
 import { manaboardProjectData } from "@/data/manaboard-project-data";
 
 import {
+  AnimatePresence,
   easeInOut,
   motion,
   MotionValue,
@@ -44,6 +45,8 @@ export default function HeroSection() {
   const [faceIndex, setFaceIndex] = useState(10);
   const [isAnimating, setIsAnimating] = useState(true);
 
+  const [isWindowWidthChanging, setIsWindowWidthChanging] = useState(0);
+
   const currentFeature = manaboardProjectData[faceIndex];
 
   const wheelScale = useMotionValue(0.5);
@@ -51,15 +54,31 @@ export default function HeroSection() {
   const mouseY = useMotionValue(45);
   const wheelUncap = useMotionValue(0.5);
 
+  const [innerWidth, setInnerWidth] = useState(
+    typeof window !== "undefined" ? (window.innerWidth * 0.7) / 200 : 1
+  );
+  const [innerHeight, setInnerHeight] = useState(
+    typeof window !== "undefined" ? (window.innerHeight * 0.7) / 200 : 1
+  );
+
+  useEffect(() => {
+    const resize = () => {
+      setInnerWidth((window.innerWidth * 0.7) / 200);
+      setInnerHeight((window.innerHeight * 0.7) / 200);
+    };
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
   useEffect(() => {
     if (revealKey < 250 || textKey < 265) {
       const resetReveal = setTimeout(() => {
         setRevealKey((a) => a + 1);
         setTextKey((a) => a + 1);
-        return clearTimeout(resetReveal);
       }, 4000);
+      return () => clearTimeout(resetReveal);
     }
-  }, [revealKey, setRevealKey]);
+  }, [revealKey, textKey]);
 
   useMotionValueEvent(wheelUncap, "change", (latest) => {
     console.log("wheelscale changed to", latest);
@@ -100,18 +119,6 @@ export default function HeroSection() {
     return useMotionTemplate`${finalTransform}px`;
   };
   const webkitStroke = setWebkitStroke();
-
-  // useMotionValueEvent(webkitStroke, "change", (latest) => {
-  //   console.log("x changed to", latest);
-  // });
-
-  const scaleXAfterCubeClick = useTransform(() =>
-    typeof window !== "undefined" ? (window.innerWidth * 0.7) / 200 : 1
-  );
-
-  const scaleYAfterCubeClick = useTransform(() =>
-    typeof window !== "undefined" ? (window.innerHeight * 0.7) / 200 : 1
-  );
 
   const getLettersForMovement = (letter: string) => {
     const letters = Array(1000).fill(letter);
@@ -161,7 +168,7 @@ export default function HeroSection() {
               </motion.div>
             </div>
 
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden ">
               <motion.div
                 key={textKey}
                 animate={{
@@ -224,8 +231,8 @@ export default function HeroSection() {
                   animate={{
                     opacity: [0, 1],
                     scale: [0, 1],
-                    scaleX: [1, scaleXAfterCubeClick.get()],
-                    scaleY: [1, scaleYAfterCubeClick.get()],
+                    scaleX: [1, innerWidth],
+                    scaleY: [1, innerHeight],
                     transition: {
                       scaleX: { delay: 1, duration: 0.5 },
                       scaleY: { delay: 1.5, duration: 0.5 },
@@ -239,7 +246,7 @@ export default function HeroSection() {
                   }`}
                 ></motion.div>
                 <CubeFeatureSection
-                  className={`absolute z-10000 h-[80%] min-h-0 w-[70%]  ${
+                  className={`absolute z-10000 px-2 py-2  border-1 bg-black h-[80.5%] min-h-0 w-[71.5%]  ${
                     isCubeFaceClicked ? "opacity-0" : "opacity-1"
                   } `}
                   title={currentFeature.title}

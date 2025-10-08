@@ -48,7 +48,8 @@ export default function CubeFace({
           transition: { duration: 0.2 },
         }}
         style={{
-          borderRadius: roundedY,
+          borderRadius: !isCubeFaceClicked ? roundedY : 1,
+          transitionDuration: isCubeFaceClicked ? "0.5s" : "0s",
         }}
         className={`${className} hover:perspective-distant border-neutral-400 outer-face-shadow content-center text-black align-middle z-10 ${
           index > 1 && ""
