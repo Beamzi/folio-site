@@ -246,7 +246,7 @@ export default function HeroSection() {
                   }`}
                 ></motion.div>
                 <CubeFeatureSection
-                  className={`absolute z-10000 px-2 py-2  border-1 bg-black h-[80.5%] min-h-0 w-[71.5%]  ${
+                  className={`absolute z-10000 px-2 py-2 border-1 bg-black h-[80.5%] min-h-0 w-[71.5%]  ${
                     isCubeFaceClicked ? "opacity-0" : "opacity-1"
                   } `}
                   title={currentFeature.title}
@@ -254,6 +254,7 @@ export default function HeroSection() {
                   details={currentFeature.details}
                   src={currentFeature.src}
                   alt={currentFeature.alt}
+                  innerWidth={innerWidth}
                 />
               </>
             )}

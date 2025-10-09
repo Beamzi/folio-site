@@ -55,7 +55,7 @@ export default function CubeFace({
           index > 1 && ""
         } ${translateRotate} ${
           faceIndex === index
-            ? "bg-emerald-300 transition-all   face-hover "
+            ? "bg-fuchsia-900 transition-all   face-hover "
             : "bg-neutral-500/30"
         }`}
       >
