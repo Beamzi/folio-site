@@ -44,7 +44,7 @@ export const manaboardProjectData = [
   {
     title: "Search & Filtering",
     content: "Advanced search with typo tolerance across all task properties",
-    src: "/screens/ipad-ux.jpg",
+    src: "/screens/inbox-view.jpg",
     alt: "ipad view",
     details: [
       "Global Search Modal - Dashboard-accessible search with instant results",
@@ -58,6 +58,7 @@ export const manaboardProjectData = [
     content:
       "Layout dynamically changes in structure and functionality to any viewport dimensions, set up for react native",
     src: "/screens/ipad-ux.jpg",
+    src2: "/screens/mobile-first-ux-2.jpg",
     alt: "ipad view",
     details: [
       "Skeleton Adapter Integration - Utilizes a flexible container system that accepts any React element as data props, allowing different content types to seamlessly adapt to various screen sizes without code duplication or layout breaks",
@@ -70,7 +71,7 @@ export const manaboardProjectData = [
     title: "Productivity & Analytics",
     content:
       "Layout dynamically changes in structure and functionality to any viewport dimensions, set up for react native",
-    src: "/screens/ipad-ux.jpg",
+    src: "/screens/analytics.jpg",
     alt: "ipad view",
     details: [
       "Time Chart - Visual analytics showing task distribution by days remaining until due date",

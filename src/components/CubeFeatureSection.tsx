@@ -16,6 +16,7 @@ interface Props {
   title: string;
   content: string;
   src?: string;
+  src2?: string;
   alt?: string;
   details: string[];
   className: string;
@@ -25,6 +26,7 @@ export default function CubeFeatureSection({
   title,
   content,
   src,
+  src2,
   alt,
   details,
   className,
@@ -45,8 +47,6 @@ export default function CubeFeatureSection({
     innerWidth1,
     (innerWidth1) => innerWidth1 * 0.71
   );
-
-  const template = useMotionTemplate(``);
 
   // useEffect(() => {
   //   const resize = () => {
@@ -149,18 +149,55 @@ export default function CubeFeatureSection({
         )}
 
         {showImg && (
-          <motion.div
-            animate={{ opacity: [0, 1] }}
-            transition={{ duration: 1 }}
-            className="w-full border-1 max-h-full  "
-          >
-            <img
-              src={src}
-              alt={alt}
-              style={{ objectFit: "cover" }}
-              className="w-full h-full"
-            ></img>
-          </motion.div>
+          <>
+            {src2 ? (
+              <div className="w-full h-full flex relative">
+                <div className="w-full  h-full absolute z-10 inset-shadow-sm radial-overlay"></div>
+
+                <motion.div
+                  animate={{ opacity: [0, 1] }}
+                  transition={{ duration: 1 }}
+                  className="w-3/4 border-1 max-h-full  "
+                >
+                  <img
+                    src={src}
+                    alt={alt}
+                    style={{ objectFit: "cover", objectPosition: "left top" }}
+                    className="w-full h-full z-1 relative "
+                  ></img>
+                </motion.div>
+                <motion.div
+                  animate={{ opacity: [0, 1] }}
+                  transition={{ duration: 1 }}
+                  className="w-1/4 border-1 max-h-full ml-2 bg-black z-1"
+                >
+                  <img
+                    src={src2}
+                    alt={alt}
+                    style={{ objectFit: "cover", objectPosition: "left top" }}
+                    className="w-full h-full z-1 relative "
+                  ></img>
+                </motion.div>
+              </div>
+            ) : (
+              <>
+                <motion.div
+                  animate={{ opacity: [0, 1] }}
+                  transition={{ duration: 1 }}
+                  className="w-full border-1 max-h-full z-1 relative "
+                >
+                  <div className="w-full h-full absolute z-10 inset-shadow-sm radial-overlay"></div>
+
+                  <img
+                    src={src}
+                    alt={alt}
+                    style={{ objectFit: "cover", objectPosition: "left top" }}
+                    className="w-full h-full z-1 relative"
+                  ></img>
+                </motion.div>
+              </>
+            )}
+          </>
         )}
       </div>
     </motion.div>

@@ -253,6 +253,7 @@ export default function HeroSection() {
                   content={currentFeature.content}
                   details={currentFeature.details}
                   src={currentFeature.src}
+                  src2={currentFeature.src2}
                   alt={currentFeature.alt}
                   innerWidth={innerWidth}
                 />
