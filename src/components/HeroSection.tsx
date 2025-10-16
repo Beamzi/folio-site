@@ -18,7 +18,7 @@ import {
 import CubeFace from "@/components/CubeFace";
 import { LiaTabletSolid } from "react-icons/lia";
 import { HiOutlineMagnifyingGlassCircle } from "react-icons/hi2";
-import { BiBrightness } from "react-icons/bi";
+import { BiBrightness, BiChevronDown, BiChevronsDown } from "react-icons/bi";
 import StackListMarquee from "@/components/StackListMarquee";
 import SingleFeature from "./SingleFeature";
 import CubeFeatureSection from "./CubeFeatureSection";

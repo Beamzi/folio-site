@@ -60,7 +60,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${googleFontAny.variable} antialiased`}
+        id="body"
+        className={`relative ${geistSans.variable} ${geistMono.variable} ${googleFontAny.variable} antialiased`}
       >
         {/* <Header /> */}
 

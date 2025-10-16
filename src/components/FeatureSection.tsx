@@ -89,10 +89,10 @@ const manaboardProjectData = [
   },
 ];
 
-interface Props {
-  expandSection: boolean;
-  setExpandSection: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// interface Props {
+//   expandSection: boolean;
+//   setExpandSection: React.Dispatch<React.SetStateAction<boolean>>;
+// }
 
 // const getFeatureList = ({ expandSection, setExpandSection }: Props) => {
 //   let arr = [];
@@ -126,7 +126,11 @@ interface Props {
 //   return arr;
 // };
 
-export default function FeatureSection() {
+interface Props {
+  initialScroll: boolean;
+}
+
+export default function FeatureSection({ initialScroll }: Props) {
   const [expandSection, setExpandSection] = useState(true);
 
   const [activeSection, setActiveSection] = useState(10);
