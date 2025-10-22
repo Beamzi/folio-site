@@ -11,6 +11,8 @@ export default function SingleFeature({
   title,
   content,
   src,
+  video,
+  src2,
   alt,
   btnIndex,
   isScrollInEffect,
@@ -24,7 +26,9 @@ export default function SingleFeature({
 }: {
   title: string;
   content: string;
-  src: string;
+  src?: string;
+  video?: string;
+  src2?: string;
   alt: string;
   btnIndex: number;
   isScrollInEffect?: boolean;
@@ -87,7 +91,7 @@ export default function SingleFeature({
                 }
               });
             }}
-            className="border-1"
+            className="border-1 relative z-10000000000000 cursor-pointer"
           >
             See Details
           </button>
@@ -101,12 +105,31 @@ export default function SingleFeature({
           )}
         </div>
         <div className="w-1/2 ">
-          <img
-            style={{ objectFit: "cover" }}
-            className="w-full h-full"
-            src={src}
-            alt={alt}
-          ></img>
+          {video && (
+            <video
+              className="w-full h-full "
+              style={{ objectFit: "cover", objectPosition: "top left" }}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+            >
+              <source src={video} type="video/mp4" />
+            </video>
+          )}
+
+          {/* {video ? (
+            <div className="w-full h-full">
+            </div>
+          ) : (
+            <img
+              style={{ objectFit: "cover" }}
+              className="w-full h-full"
+              src={src}
+              alt={alt}
+            ></img>
+          )} */}
         </div>
       </section>
     </motion.div>
