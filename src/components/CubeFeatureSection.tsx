@@ -22,6 +22,7 @@ interface Props {
   className: string;
   innerWidth: number;
 }
+
 export default function CubeFeatureSection({
   title,
   content,

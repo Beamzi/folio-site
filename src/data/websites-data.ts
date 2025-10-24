@@ -25,7 +25,7 @@ export const websitesData = [
       "Heavy use of CSS transforms to manipulate Lottie animations for depth, rotation, and motion effects",
       "Custom gradient switch button with smooth animated transitions and hover effects, demonstrating advanced CSS manipulation",
     ],
-    url: "https://brisbanewebsitedesign.au/",
+    url: "https://brisbanewebsitedesign.au/#services",
     github: "https://github.com/Beamzi/Daymedia-WP",
   },
   {
@@ -38,7 +38,7 @@ export const websitesData = [
       "Custom contact form styles and interactions built ontop of freeware",
       "Custom scroll behaviour & viewport interactions using a config object system for dom api calls,",
       "Stateful header, displaying differing styles and transitions for different routes",
-      "Retofit styles and interactions ontop of an in-use data-entry and search filter plugin ",
+      "Retrofit styles and interactions ontop of an in-use data-entry and search filter plugin ",
       "Custom modules like masonry overlays with clickthrough filtering to meet clients requirements",
     ],
     url: "https://thedisabilityhousingcentre.com.au/",

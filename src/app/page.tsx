@@ -15,13 +15,9 @@ export default function Page() {
   const mainRef = useRef<HTMLInputElement>(null);
 
   return (
-    <motion.main
-      key={mainKey}
-      // ref={mainRef}
-      // animate={mainAnim && { opacity: [0, 1] }}
-    >
+    <motion.main key={mainKey}>
       <motion.div
-        className={` h-screen scale-98 absolute top-0 w-screen z-10000 pointer-events-none overflow-y-hidden ${
+        className={`h-screen scale-98 absolute top-0 z-10000 pointer-events-none overflow-y-hidden ${
           mainAnim ? "bg-neutral-400" : "bg-transparent block"
         } `}
         animate={mainAnim && { opacity: [1, 0], transition: { duration: 0.5 } }}

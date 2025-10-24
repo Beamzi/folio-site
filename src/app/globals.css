@@ -293,3 +293,35 @@ body {
 .nav-back-light-shadow {
   box-shadow: 1px 1px 20px 0px rgba(255, 255, 255, 0.382);
 }
+
+/* #f0abfc =fuchsia-300 #f59e0b  = amber-500 */
+
+.global-button-gradient:hover {
+  /* background: #3f5efb; */
+  background: linear-gradient(91deg, #b45309 0%, #d946ef 100%);
+
+  background-size: 100% 100%;
+  background-position: center center;
+  animation: 0.4s linear forwards global-button;
+}
+
+@keyframes global-button {
+  0% {
+    opacity: 0;
+    background-size: 100% 100%;
+    background-position: top left;
+    filter: brightness(2);
+  }
+  30% {
+    opacity: 1;
+  }
+  50% {
+    background-size: 400% 400%;
+    background-position: 150% 300%;
+  }
+  100% {
+    background-size: 100% 100%;
+    background-position: bottom right;
+    filter: brightness(1);
+  }
+}
