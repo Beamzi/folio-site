@@ -9,9 +9,11 @@ import {
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { motion } from "motion/react";
 import { transferableAbortSignal } from "util";
+import { manaboardProjectData } from "@/data/manaboard-project-data";
 
 interface Props {
   translateRotate: string;
+  currentFeatureTitle?: string;
   className: string;
   mouseY: MotionValue<number>;
   mouseX: MotionValue<number>;
@@ -29,6 +31,7 @@ interface Props {
 export default function CubeFace({
   faceIndex,
   translateRotate,
+  currentFeatureTitle,
   className,
   mouseY,
   mouseX,
@@ -38,6 +41,7 @@ export default function CubeFace({
 }: Props) {
   const roundedX = useTransform(mouseX, [300, 400], [0, 100]);
   const roundedY = useTransform(mouseY, [120, 500], [0, 100]);
+  const currentFeature = manaboardProjectData[index];
 
   return (
     <>
@@ -55,15 +59,15 @@ export default function CubeFace({
           index > 1 && ""
         } ${translateRotate} ${
           faceIndex === index
-            ? "bg-fuchsia-900 transition-all   face-hover "
+            ? "global-button-gradient-active transition-all   face-hover "
             : "bg-neutral-500/30"
         }`}
       >
-        <h3 className="text-black scale-70">
+        {/* <h3 className="text-white scale-70">
           {faceIndex === index && `Manaboard`}
-        </h3>
-        <p className="text-black text-xs scale-70">
-          {faceIndex === index && `Feature-${index}`}
+        </h3> */}
+        <p className="text-white text-sm scale-70 text-wrap">
+          {faceIndex === index && `${currentFeature.title}`}
         </p>
       </motion.div>
     </>

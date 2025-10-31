@@ -5,6 +5,7 @@ import FeatureSection from "@/components/FeatureSection";
 import { BiChevronsDown, BiChevronsUp, BiChevronUp } from "react-icons/bi";
 import { RefObject, useRef, useState } from "react";
 import { motion } from "motion/react";
+import HeaderTopBar from "@/components/HeaderTopBar";
 
 export default function Page() {
   const [showFeatureSection, setShowFeatureSection] = useState(false);
@@ -16,6 +17,7 @@ export default function Page() {
 
   return (
     <motion.main key={mainKey}>
+      <HeaderTopBar />
       <motion.div
         className={`h-screen scale-98 absolute top-0 z-10000 pointer-events-none overflow-y-hidden ${
           mainAnim ? "bg-neutral-400" : "bg-transparent block"
@@ -29,7 +31,6 @@ export default function Page() {
           setShowFeatureSection(showFeatureSection ? false : true);
           setInitialScroll(true);
           setMainAnim(true);
-
           setTimeout(() => {
             const feature3 = document.getElementById("feature-0");
             setMainKey(mainKey + 10);

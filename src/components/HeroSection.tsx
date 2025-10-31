@@ -142,9 +142,10 @@ export default function HeroSection() {
   return (
     <>
       <section className="h-screen relative flex justify-center items-center">
+        {/* beware mt-8  */}
         <section
           style={{ width: `${topWidth}%` }}
-          className={`overflow-hidden whitespace-nowrap min-h-0 `}
+          className={`overflow-hidden whitespace-nowrap min-h-0 mt-8 `}
         >
           <div
             className="h-full min-h-0 py-3 border-1
@@ -194,7 +195,7 @@ export default function HeroSection() {
             style={{ x: marquee, color: marqueeColor }}
             animate={{ x: [0, "-50%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="w-full inline-flex relative -z-10  "
+            className="w-full inline-flex relative -z-10 "
           >
             {getLettersForMovement("I")}
           </motion.div>
@@ -204,7 +205,7 @@ export default function HeroSection() {
               backgroundPosition: template,
               // pointerEvents: isCubeFaceClicked ? "none" : "auto",
             }}
-            className={`radial-background  w-full h-[70vh] flex-col min-h-0 border-1 -mt-3.5 outline-standard flex justify-center items-center relative`}
+            className={`radial-background  w-full h-[70vh] flex-col min-h-0  -mt-5 outline-standard flex justify-center items-center relative`}
             onMouseMove={(e) => {
               if (isCubeFaceClicked) {
                 console.log("should return early");
@@ -229,19 +230,21 @@ export default function HeroSection() {
               <>
                 <motion.div
                   animate={{
+                    borderColor: ["#FFFFFF", "#404040", "#40404019"],
                     opacity: [0, 1],
                     scale: [0, 1],
                     scaleX: [1, innerWidth],
                     scaleY: [1, innerHeight],
                     transition: {
-                      scaleX: { delay: 1, duration: 0.5 },
-                      scaleY: { delay: 1.5, duration: 0.5 },
+                      scaleX: { delay: 0.8, duration: 0.3 },
+                      scaleY: { delay: 1.2, duration: 0.3 },
                       scale: { delay: 0.3, duration: 0.5 },
-                      opacity: { delay: 0.3, duration: 1.2 },
+                      opacity: { delay: 0.5, duration: 0.5 },
+                      borderColor: { delay: 0.8, duration: 0.8 },
                     },
                   }}
                   // transition={{ delay: 0.3, duration: 0.5 }}
-                  className={`size-40 bg-black border-1 border-white z-100 absolute ${
+                  className={`size-40 bg-black border-1 px-20 border-white z-100 absolute ${
                     isCubeFaceClicked ? "opacity-0" : "opacity-1"
                   }`}
                 ></motion.div>
@@ -261,6 +264,7 @@ export default function HeroSection() {
             )}
 
             <motion.div
+              // key={`${faceIndex}-${isCubeFaceClicked}`} // Forces new animation on change
               animate={
                 isCubeFaceClicked
                   ? {
@@ -350,7 +354,7 @@ export default function HeroSection() {
                   // setFaceIndex(10);
                 }}
                 key={index}
-                className={`face-1 cursor-pointer hover:pr-10 px-2 hover:bg-red-600 transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard border-l-1 ${
+                className={`face-1 cursor-pointer hover:pr-10 px-2 global-button-gradient transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard border-l-1 ${
                   index === 5 && "border-r-1"
                 }`}
               >{`Feature-${index + 1}`}</button>

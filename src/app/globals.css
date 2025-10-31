@@ -35,6 +35,7 @@ body {
 .init-animation {
   animation: 8s infinite ease cube-animation;
 }
+
 @keyframes cube-animation {
   0% {
     transform: rotateY(0deg) rotateX(0deg);
@@ -192,29 +193,6 @@ body {
   backdrop-filter: blur(100px);
 }
 
-@layer components {
-  body {
-    @apply bg-black;
-  }
-
-  h3 {
-    @apply text-white;
-  }
-
-  .bg-standard {
-    @apply bg-neutral-800;
-  }
-  .outline-standard {
-    @apply outline-5 -outline-offset-6 outline-neutral-900;
-  }
-
-  section,
-  div,
-  button {
-    @apply border-neutral-600 text-neutral-300;
-  }
-}
-
 .gradient-cube-overflow {
   background: #ffffff;
   background: linear-gradient(
@@ -296,6 +274,15 @@ body {
 
 /* #f0abfc =fuchsia-300 #f59e0b  = amber-500 */
 
+.global-button-gradient-active {
+  /* background: #3f5efb; */
+  background: linear-gradient(91deg, #b45309 0%, #d946ef 100%);
+
+  background-size: 100% 100%;
+  background-position: center center;
+  animation: 0.4s linear forwards global-button;
+}
+
 .global-button-gradient:hover {
   /* background: #3f5efb; */
   background: linear-gradient(91deg, #b45309 0%, #d946ef 100%);
@@ -325,3 +312,39 @@ body {
     filter: brightness(1);
   }
 }
+
+@layer components {
+  body {
+    @apply bg-black;
+  }
+
+  h3 {
+    @apply text-white;
+  }
+  .global-button {
+    @apply bg-neutral-900;
+  }
+
+  .bg-standard {
+    @apply bg-neutral-800;
+  }
+  .outline-standard {
+    @apply outline-5 -outline-offset-6 outline-neutral-900;
+  }
+
+  section,
+  div,
+  button {
+    @apply border-neutral-600 text-neutral-300;
+  }
+}
+
+/* .global-button-parent-12 {
+    @apply group transition-all duration-300 global-button-gradient;
+  }
+  .global-button-icon-1233 {
+    @apply group-hover:scale-120 group-hover:mr-5 transition-all group-hover:text-amber-500 duration-300;
+  }
+  .global-button-text-123 {
+    @apply group-hover:scale-110 transition-all duration-300;
+  } */

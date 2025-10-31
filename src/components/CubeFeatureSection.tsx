@@ -11,6 +11,7 @@ import { SiGithub } from "react-icons/si";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { FaDotCircle, FaEnvelope } from "react-icons/fa";
 import { tr } from "motion/react-client";
+import ContactModal from "./ContactModal";
 
 interface Props {
   title: string;
@@ -35,6 +36,7 @@ export default function CubeFeatureSection({
 }: Props) {
   const [showImg, setShowImg] = useState(false);
   const [translateRight, setTranslateRight] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   // const [innerWidth1, setInnerWidth1] = useState(
   //   typeof window !== "undefined" ? window.innerWidth * 0.7 * 0.71 : 1
@@ -63,7 +65,7 @@ export default function CubeFeatureSection({
     <motion.div
       animate={{
         opacity: [0, 1],
-        transition: { opacity: { duration: 1, delay: 2 } },
+        transition: { opacity: { duration: 1, delay: 1.4 } },
       }}
       className={className}
     >
@@ -74,7 +76,7 @@ export default function CubeFeatureSection({
               <h3 className="w-full px-2 py-1 text-lg break-word overflow-hidden h- text-ellipsis whitespace-normal border-b-1 pb-1 border-neutral-700">
                 {title}
               </h3>
-              <p className=" px-2 py-1 w-full break-word text-ellipsis whitespace-normal border-b-1  mb-1 border-neutral-700">
+              <p className="px-2 py-1 w-full break-word text-ellipsis whitespace-normal border-b-1  mb-1 border-neutral-700">
                 {content}
               </p>
 
@@ -96,13 +98,16 @@ export default function CubeFeatureSection({
               </div>
             </div>
 
-            <div className="flex h-5 w-full  bg-black absolute bottom-2.5 border-t-1 left-0 z-200 py-4 justify-start pointer-events-none"></div>
-            <div className="flex items-center h-5 w-full border-1 bg-black absolute bottom-0 left-0 z-1000 py-4 justify-start ">
+            <div className="flex h-5 w-full  bg-black absolute bottom-2.5 border-t-1 left-0 z-100 py-4 justify-start pointer-events-none"></div>
+            <div className="flex items-center h-5 w-full border-1 bg-black absolute bottom-0 left-0 z-200 py-4 justify-start ">
               <button className="flex px-2 w-1/2 cursor-pointer border-l-1 h-8 hover:bg-fuchsia-900 transition duration-300  items-center align-middle ">
                 <SiGithub className="w-5 h-5 mr-1 " />
                 Visit Repository
               </button>
-              <button className="flex px-2 w-1/2 hover:bg-fuchsia-900 transition duration-300 items-center h-8 border-l-1 cursor-pointer align-middle">
+              <button
+                onClick={() => setShowContactModal(true)}
+                className="flex px-2 w-1/2 hover:bg-fuchsia-900 transition duration-300 items-center h-8 border-l-1 cursor-pointer align-middle"
+              >
                 <FaEnvelope className="w-5 h-5 mr-2" />
                 Get In Touch
               </button>
@@ -201,6 +206,20 @@ export default function CubeFeatureSection({
           </>
         )}
       </div>
+      {showContactModal && (
+        <>
+          <motion.div
+            animate={{ backdropFilter: "blur(4px)" }}
+            initial={{ backdropFilter: "blur(0px)" }}
+            transition={{ duration: 1 }}
+            onClick={() => setShowContactModal(false)}
+            className="fixed top-0 left-0 z-400 h-[100vh] w-[100vw] bg-neutral-900/80 "
+          ></motion.div>
+          <div className="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-500 w-100">
+            <ContactModal />
+          </div>
+        </>
+      )}
     </motion.div>
   );
 }

@@ -99,20 +99,20 @@ export default function SingleFeature({
           <div className=" w-full bg-black py-1"></div>
           <div
             className="h-10 bg-black border-y-1 flex
-          items-center  z-10000 relative"
+          items-center  z-10 relative"
           >
             <a
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group global-button-gradient h-10 w-1/2 border-x-1 z-1000 cursor-pointer flex items-center 1 border-neutral-700"
+              className="group global-button-gradient h-10 w-1/2 border-x-1 z-10 cursor-pointer flex items-center 1 border-neutral-700"
             >
               <LuAppWindow className="w-5 h-5 mx-2  group-hover:scale-120 group-hover:mr-5 transition-all group-hover:text-amber-500 duration-300" />
               <span className="group-hover:scale-110 transition-all duration-300">
                 Visit Site
               </span>
             </a>
-            <button className="group transition-all duration-300 global-button-gradient h-10 w-1/2 border-r-1 z-1000 cursor-pointer flex items-center ">
+            <button className="group transition-all duration-300 global-button-gradient h-10 w-1/2 border-r-1 z-10 cursor-pointer flex items-center ">
               <LuPhoneCall className="w-5 h-5 mx-2 group-hover:scale-120 group-hover:mr-5 transition-all group-hover:text-amber-500 duration-300" />
               <span className="group-hover:scale-110 transition-all duration-300">
                 Contact Me
