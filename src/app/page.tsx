@@ -43,11 +43,25 @@ export default function Page() {
             setMainAnim(false);
           }, 500);
         }}
-        className="border-1 flex flex-col p-3 bg-black items-center z-5000 fixed bottom-5 right-3 cursor-pointer"
+        className="group transition-all duration-300 global-button-gradient show-feature-section border-1 flex flex-col p-3 bg-black items-center z-5000 fixed bottom-5 right-3 cursor-pointer"
       >
-        {showFeatureSection && <BiChevronsUp className="w-6 h-6 border 1" />}
-        <span>{showFeatureSection ? "Back to cube" : "What Else?"}</span>
-        {!showFeatureSection && <BiChevronsDown className="w-6 h-6 border-1" />}
+        {showFeatureSection && (
+          <>
+            <BiChevronsUp className="group-hover:scale-110 group-hover:text-amber-500 transition-all duration-300 w-6 h-6 border 1" />
+            <span className="group-hover:pt-3 group-hover:scale-105 transition-all duration-300">
+              Back To Cube
+            </span>
+          </>
+        )}
+
+        {!showFeatureSection && (
+          <>
+            <BiChevronsDown className="group-hover:scale-110 group-hover:text-amber-500 transition-all duration-300 w-6 h-6 border-1" />
+            <span className="group-hover:pt-3 group-hover:scale-105 transition-all duration-300">
+              What Else?
+            </span>
+          </>
+        )}
       </button>
 
       {showFeatureSection && <FeatureSection initialScroll={initialScroll} />}

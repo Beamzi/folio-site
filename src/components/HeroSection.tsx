@@ -32,6 +32,15 @@ const faces = [
   "translate-y-12 -rotate-x-90",
 ];
 
+const featureTitlesShort = [
+  "Tasks",
+  "Projects",
+  "Views",
+  "Search",
+  "Layout",
+  "Analytics",
+];
+
 export default function HeroSection() {
   const topWidth = 80;
   const topHeight = 80;
@@ -163,8 +172,11 @@ export default function HeroSection() {
                 className="flex justify-center items-center "
               >
                 <img src="/logo/2.svg" className="w-7 h-7 mx-1 "></img>
-                <motion.h3 className="text-lg  w-full text-center">
-                  The Manaboard Cube, My latest Project Showcase
+                <motion.h3 className="absolute invisible sm:visible sm:relative text-lg  w-full text-center">
+                  Manaboard, My latest Project Showcase
+                </motion.h3>
+                <motion.h3 className=" sm:hidden  text-lg  w-full text-center">
+                  Manaboard
                 </motion.h3>
               </motion.div>
             </div>
@@ -357,7 +369,10 @@ export default function HeroSection() {
                 className={`face-1 cursor-pointer hover:pr-10 px-2 global-button-gradient transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard border-l-1 ${
                   index === 5 && "border-r-1"
                 }`}
-              >{`Feature-${index + 1}`}</button>
+              >
+                <span className="invisible absolute sm:visible sm:relative ">{`${featureTitlesShort[index]}`}</span>
+                <span className="sm:hidden ">{`${index + 1}`}</span>
+              </button>
             ))}
           </motion.div>
           <div>

@@ -118,35 +118,8 @@ body {
   }
 }
 
-/* 
-.sand-box-gradient {
-  background: radial-gradient(
-        circle at 0% 50%,
-        rgba(96, 16, 48, 0) 9px,
-        #613 10px,
-        rgba(96, 16, 48, 0) 11px
-      )
-      0px 10px,
-    radial-gradient(
-      at 100% 100%,
-      rgba(96, 16, 48, 0) 9px,
-      #613 10px,
-      rgba(96, 16, 48, 0) 11px
-    ),
-    rgb(25, 5, 1);
-  background-size: 20px 20px;
-  animation: infinite linear 20s sand-box-anim;
-}
-
-@keyframes sand-box-anim {
-  100% {
-    background-position: 100% 100%;
-  }
-} */
-
 .outer-face-shadow {
   box-shadow: 0px 0px 30px 20px black;
-  /* box-shadow: 0px 0px 80px 30px black; */
 }
 
 .radial-background {
@@ -179,15 +152,6 @@ body {
     background-position: center center;
   }
 }
-
-/* .radial-background {
-  background: #000000;
-  background: radial-gradient(
-    circle,
-    rgb(61, 61, 61) 43%,
-    rgba(255, 255, 255, 1) 100%
-  );
-} */
 
 .hello {
   backdrop-filter: blur(100px);
@@ -336,6 +300,19 @@ body {
   div,
   button {
     @apply border-neutral-600 text-neutral-300;
+  }
+}
+
+.show-feature-section:hover {
+  svg {
+    transform: translateY(0);
+    animation: 0.5s ease-in-out infinite show-feature-section-anim;
+  }
+}
+
+@keyframes show-feature-section-anim {
+  50% {
+    transform: translateY(5);
   }
 }
 

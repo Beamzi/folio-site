@@ -12,6 +12,7 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { FaDotCircle, FaEnvelope } from "react-icons/fa";
 import { tr } from "motion/react-client";
 import ContactModal from "./ContactModal";
+import { LuCircleCheck } from "react-icons/lu";
 
 interface Props {
   title: string;
@@ -89,7 +90,7 @@ export default function CubeFeatureSection({
                       key={index + 374}
                       className="flex ml-2 text-neutral-400  text-sm "
                     >
-                      <FaDotCircle className="min-w-4 min-h-4 mr-2 my-1" />
+                      <LuCircleCheck className="min-w-4 min-h-4 mr-2 my-1" />
                       {item}
                     </li>
                   ))}
@@ -100,16 +101,25 @@ export default function CubeFeatureSection({
 
             <div className="flex h-5 w-full  bg-black absolute bottom-2.5 border-t-1 left-0 z-100 py-4 justify-start pointer-events-none"></div>
             <div className="flex items-center h-5 w-full border-1 bg-black absolute bottom-0 left-0 z-200 py-4 justify-start ">
-              <button className="flex px-2 w-1/2 cursor-pointer border-l-1 h-8 hover:bg-fuchsia-900 transition duration-300  items-center align-middle ">
-                <SiGithub className="w-5 h-5 mr-1 " />
-                Visit Repository
-              </button>
+              <a
+                href="https://github.com/Beamzi/project-task-manager"
+                rel="noopener noreferrer"
+                target="_blank"
+                className="flex justify-center sm:justify-start group transition-all duration-300 global-button-gradient; px-2 w-1/2 cursor-pointer  h-8 global-button-gradient items-center align-middle "
+              >
+                <SiGithub className="group-hover:scale-120  group-hover:mr-5 transition-all group-hover:text-amber-500 duration-300 w-5 h-5 mr-1 " />
+                <span className="invisible absolute sm:visible sm:relative group-hover:scale-110 transition-all duration-300">
+                  Visit Repository
+                </span>
+              </a>
               <button
                 onClick={() => setShowContactModal(true)}
-                className="flex px-2 w-1/2 hover:bg-fuchsia-900 transition duration-300 items-center h-8 border-l-1 cursor-pointer align-middle"
+                className="flex justify-center sm:justify-start px-2 w-1/2 global-button-gradient items-center h-8 border-l-1 cursor-pointer align-middle group transition-all duration-300"
               >
-                <FaEnvelope className="w-5 h-5 mr-2" />
-                Get In Touch
+                <FaEnvelope className="group-hover:scale-120 group-hover:mr-5 transition-all group-hover:text-amber-500 duration-300 w-5 h-5 mr-2" />
+                <span className="invisible absolute sm:visible sm:relative group-hover:scale-110 transition-all duration-300">
+                  Get In Touch
+                </span>
               </button>
             </div>
           </div>
@@ -125,7 +135,7 @@ export default function CubeFeatureSection({
               setTranslateRight(!translateRight ? true : false);
             }, 300);
           }}
-          className={`flex inset-shadow-sm bg-fuchsia-900 inset-shadow-fuchsia-500 cursor-pointer z-50 relative hover:[&>*]:scale-120 hover:bg-fuchsia-700 transition duration-300 w-10 align-middle items-center justify-center border-1  ${
+          className={`flex inset-shadow-sm bg-fuchsia-900 inset-shadow-fuchsia-500 cursor-pointer z-50 relative hover:[&>*]:scale-120 global-button-gradient transition duration-300 w-10 align-middle items-center justify-center border-1  ${
             showImg ? "mr-2 " : "ml-2 "
           }`}
         >
@@ -142,7 +152,7 @@ export default function CubeFeatureSection({
               x: translateRight ? -(containerWidth - 69.5) : 0,
             }}
             transition={{ duration: 0.1, ease: "easeIn" }}
-            className={`absolute top-0 right-0 h-full  flex inset-shadow-sm bg-fuchsia-900 z-40 inset-shadow-fuchsia-500 cursor-pointer  hover:[&>*]:scale-120 hover:bg-fuchsia-700 transition duration-300 w-10 align-middle items-center justify-center border-1  ${
+            className={`absolute top-0 right-0 h-full  flex inset-shadow-sm bg-fuchsia-900 global-button-gradient z-40 inset-shadow-fuchsia-500 cursor-pointer  hover:[&>*]:scale-120  transition duration-300 w-10 align-middle items-center justify-center border-1  ${
               showImg ? "mr-2 " : "ml-2 "
             }`}
           >
@@ -206,20 +216,11 @@ export default function CubeFeatureSection({
           </>
         )}
       </div>
-      {showContactModal && (
-        <>
-          <motion.div
-            animate={{ backdropFilter: "blur(4px)" }}
-            initial={{ backdropFilter: "blur(0px)" }}
-            transition={{ duration: 1 }}
-            onClick={() => setShowContactModal(false)}
-            className="fixed top-0 left-0 z-400 h-[100vh] w-[100vw] bg-neutral-900/80 "
-          ></motion.div>
-          <div className="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-500 w-100">
-            <ContactModal />
-          </div>
-        </>
-      )}
+
+      <ContactModal
+        showContactModal={showContactModal}
+        setShowContactModal={setShowContactModal}
+      />
     </motion.div>
   );
 }
