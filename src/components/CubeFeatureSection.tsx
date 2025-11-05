@@ -1,16 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useTransform,
-} from "motion/react";
+import { motion, useMotionValue, useTransform } from "motion/react";
 import { SiGithub } from "react-icons/si";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import { FaDotCircle, FaEnvelope } from "react-icons/fa";
-import { tr } from "motion/react-client";
+import { FaEnvelope } from "react-icons/fa";
 import ContactModal from "./ContactModal";
 import { LuCircleCheck } from "react-icons/lu";
 
@@ -33,7 +27,6 @@ export default function CubeFeatureSection({
   alt,
   details,
   className,
-  innerWidth,
 }: Props) {
   const [showImg, setShowImg] = useState(false);
   const [translateRight, setTranslateRight] = useState(false);
@@ -135,7 +128,7 @@ export default function CubeFeatureSection({
               setTranslateRight(!translateRight ? true : false);
             }, 300);
           }}
-          className={`flex inset-shadow-sm bg-fuchsia-900 inset-shadow-fuchsia-500 cursor-pointer z-50 relative hover:[&>*]:scale-120 global-button-gradient transition duration-300 w-10 align-middle items-center justify-center border-1  ${
+          className={`flex  global-button-gradient-active-vertical cursor-pointer z-50 relative hover:[&>*]:scale-120 transition duration-300 w-10 align-middle items-center justify-center border-1  ${
             showImg ? "mr-2 " : "ml-2 "
           }`}
         >
@@ -152,7 +145,7 @@ export default function CubeFeatureSection({
               x: translateRight ? -(containerWidth - 69.5) : 0,
             }}
             transition={{ duration: 0.1, ease: "easeIn" }}
-            className={`absolute top-0 right-0 h-full  flex inset-shadow-sm bg-fuchsia-900 global-button-gradient z-40 inset-shadow-fuchsia-500 cursor-pointer  hover:[&>*]:scale-120  transition duration-300 w-10 align-middle items-center justify-center border-1  ${
+            className={`invisible sm:visible  absolute top-0 right-0 h-full  flex inset-shadow-sm global-button-gradient-active-vertical global-button-gradient z-40  cursor-pointer  hover:[&>*]:scale-120  transition duration-300 w-10 align-middle items-center justify-center border-1 ${
               showImg ? "mr-2 " : "ml-2 "
             }`}
           >

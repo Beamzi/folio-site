@@ -77,11 +77,11 @@ export default function SingleFeature({
       style={isScrollInEffect ? { scale: scrollYProgress } : undefined}
       className={`${className} 
 
-       flex flex-col relative items-center w-full h-full`}
+       flex flex-col relative items-center w-full h-full `}
     >
-      <div id={id} className="spacer min-h-15 w-full "></div>
-      <section className="flex flex-row w-[80%] border-1 p-2 bg-black ">
-        <div className="w-1/2 h-full gradient-cube-overflow mr-2  ">
+      <div id={id} className="spacer min-h-15 w-full  "></div>
+      <section className="md:flex flex-row w-[80%] border-1 p-2 bg-black ">
+        <div className="md:w-1/2 h-full gradient-cube-overflow md:mr-2  ">
           <h2 className="border-x-1 p-2 border-t-1 border-neutral-700 text-lg">
             {title}
           </h2>
@@ -120,7 +120,7 @@ export default function SingleFeature({
             </button>
           </div>
         </div>
-        <div className="w-1/2 ">
+        <div className="md:w-1/2  max-[770px]:pt-2">
           {video ? (
             <video
               className="will-change-transform w-full h-full border-1 border-neutral-700 "

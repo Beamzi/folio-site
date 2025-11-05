@@ -41,6 +41,15 @@ const featureTitlesShort = [
   "Analytics",
 ];
 
+const staticValues = [
+  [360, 360],
+  [360, 360],
+  [360, 270],
+  [360, 450],
+  [270, 360],
+  [450, 360],
+];
+
 export default function HeroSection() {
   const topWidth = 80;
   const topHeight = 80;
@@ -53,8 +62,6 @@ export default function HeroSection() {
   const [switchFace, setSwitchFace] = useState(true);
   const [faceIndex, setFaceIndex] = useState(10);
   const [isAnimating, setIsAnimating] = useState(true);
-
-  const [isWindowWidthChanging, setIsWindowWidthChanging] = useState(0);
 
   const currentFeature = manaboardProjectData[faceIndex];
 
@@ -89,72 +96,15 @@ export default function HeroSection() {
     }
   }, [revealKey, textKey]);
 
-  useMotionValueEvent(wheelUncap, "change", (latest) => {
-    console.log("wheelscale changed to", latest);
-  });
-
-  const staticValues = [
-    [360, 360],
-    [360, 360],
-    [360, 270],
-    [360, 450],
-    [270, 360],
-    [450, 360],
-  ];
-
   const template = useMotionTemplate`${wheelUncap}% 20%`;
-  const mouseXMulti = useTransform(mouseX, (value) => Math.ceil(value / 4));
 
-  const mouseXMultiColor = useTransform(mouseX, (value) =>
-    Math.max(100, Math.min(250, value / 4))
-  );
-
-  const marqueeColor = useMotionTemplate`rgb(${mouseXMultiColor}, 2, 100 )`;
-
-  const marquee = useMotionTemplate`-${mouseXMulti}%`;
-
-  const setletterSpacer = () => {
-    const transform = useTransform(mouseX, (value) => Math.max(10, value / 20));
-    const finalTransform = !isAnimating ? transform : mouseX.get();
-    return useMotionTemplate`${finalTransform}px`;
-  };
-  const letterSpacer = setletterSpacer();
-
-  const setWebkitStroke = () => {
-    const transform = useTransform(mouseX, (value) =>
-      Math.min(20, Math.max(10, value / 20))
-    );
-    const finalTransform = !isAnimating ? transform : mouseX.get();
-    return useMotionTemplate`${finalTransform}px`;
-  };
-  const webkitStroke = setWebkitStroke();
-
-  const getLettersForMovement = (letter: string) => {
-    const letters = Array(1000).fill(letter);
-    const spans = [];
-    for (let i = 0; i < 2; i++) {
-      spans[i] = (
-        <motion.span
-          key={i + 10}
-          className=""
-          style={{
-            letterSpacing: letterSpacer,
-            WebkitTextStroke: webkitStroke,
-          }}
-        >
-          {letters}
-        </motion.span>
-      );
-    }
-    return <>{spans}</>;
-  };
   return (
     <>
       <section className="h-screen relative flex justify-center items-center">
         {/* beware mt-8  */}
         <section
-          style={{ width: `${topWidth}%` }}
-          className={`overflow-hidden whitespace-nowrap min-h-0 mt-8 `}
+          // style={{ width: `${topWidth}%` }}
+          className={`overflow-hidden whitespace-nowrap min-h-0 mt-8 sm:w-[80%] `}
         >
           <div
             className="h-full min-h-0 py-3 border-1
@@ -197,19 +147,19 @@ export default function HeroSection() {
                 className=" border-l-3  border-red-400  opacity-90 text-reveal-extra z-100 h-full -top-1 -right-0 absolute w-full "
               ></motion.div>
 
-              <motion.p className="tracking-normal   text-neutral-500 z-11 relative">
+              <p className="invisible sm:visible sm:relative absolute tracking-normal   text-neutral-500 z-11 ">
                 Move your mouse within the space below
-              </motion.p>
+              </p>
             </div>
           </div>
 
           <motion.div
-            style={{ x: marquee, color: marqueeColor }}
+            // style={{ x: marquee, color: marqueeColor }}
             animate={{ x: [0, "-50%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             className="w-full inline-flex relative -z-10 "
           >
-            {getLettersForMovement("I")}
+            {/* {getLettersForMovement("I")} */}
           </motion.div>
           {/* problema area */}
           <motion.div
@@ -287,10 +237,10 @@ export default function HeroSection() {
               }
               transition={{ duration: 0.6 }}
               onWheel={(e) => {
-                const current = wheelScale.get();
-                const delta = e.deltaY / 2000;
-                wheelScale.set(Math.max(0.2, Math.min(2, current + delta)));
-                wheelUncap.set(e.deltaY);
+                // const current = wheelScale.get();
+                // const delta = e.deltaY / 2000;
+                // wheelScale.set(Math.max(0.2, Math.min(2, current + delta)));
+                // wheelUncap.set(e.deltaY);
               }}
               style={{
                 rotateX: isCubeFaceClicked ? staticMousePosition[0] : mouseX,
@@ -366,9 +316,11 @@ export default function HeroSection() {
                   // setFaceIndex(10);
                 }}
                 key={index}
-                className={`face-1 cursor-pointer hover:pr-10 px-2 global-button-gradient transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard border-l-1 ${
-                  index === 5 && "border-r-1"
-                }`}
+                className={`face-1 cursor-pointer hover:pr-10 px-2 global-button-gradient 
+                  transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard border-l-1 ${
+                    faceIndex === index &&
+                    "global-button-gradient-active pr-10 px-2 "
+                  } ${index === 5 && "border-r-1"}`}
               >
                 <span className="invisible absolute sm:visible sm:relative ">{`${featureTitlesShort[index]}`}</span>
                 <span className="sm:hidden ">{`${index + 1}`}</span>

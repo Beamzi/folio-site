@@ -16,7 +16,7 @@ export default function Page() {
   const mainRef = useRef<HTMLInputElement>(null);
 
   return (
-    <motion.main key={mainKey}>
+    <motion.main className="overflow-hidden" key={mainKey}>
       <HeaderTopBar />
       <motion.div
         className={`h-screen scale-98 absolute top-0 z-10000 pointer-events-none overflow-y-hidden ${
@@ -43,11 +43,13 @@ export default function Page() {
             setMainAnim(false);
           }, 500);
         }}
-        className="group transition-all duration-300 global-button-gradient show-feature-section border-1 flex flex-col p-3 bg-black items-center z-5000 fixed bottom-5 right-3 cursor-pointer"
+        className={`group transition-all duration-300 global-button-gradient show-feature-section border-1 flex flex-col p-3 bg-black items-center z-5000 fixed  ${
+          !showFeatureSection ? "bottom-28" : "bottom-5"
+        } sm:bottom-5 right-3 cursor-pointer`}
       >
         {showFeatureSection && (
           <>
-            <BiChevronsUp className="group-hover:scale-110 group-hover:text-amber-500 transition-all duration-300 w-6 h-6 border 1" />
+            <BiChevronsUp className="group-hover:scale-110 group-hover:text-amber-500 transition-all duration-300 w-6 h-6 border 1 mb-1.5" />
             <span className="group-hover:pt-3 group-hover:scale-105 transition-all duration-300">
               Back To Cube
             </span>
@@ -56,8 +58,8 @@ export default function Page() {
 
         {!showFeatureSection && (
           <>
-            <BiChevronsDown className="group-hover:scale-110 group-hover:text-amber-500 transition-all duration-300 w-6 h-6 border-1" />
-            <span className="group-hover:pt-3 group-hover:scale-105 transition-all duration-300">
+            <BiChevronsDown className="group-hover:scale-110 group-hover:text-amber-500 transition-all duration-300 w-6 h-6 border-1 mb-1" />
+            <span className="group-hover:pt-3 group-hover:scale-105 transition-all duration-300 0">
               What Else?
             </span>
           </>

@@ -241,10 +241,23 @@ body {
 .global-button-gradient-active {
   /* background: #3f5efb; */
   background: linear-gradient(91deg, #b45309 0%, #d946ef 100%);
-
   background-size: 100% 100%;
   background-position: center center;
   animation: 0.4s linear forwards global-button;
+}
+
+.global-button-gradient-active-vertical {
+  /* background: #3f5efb; */
+  background: linear-gradient(45deg, #b45309 0%, #d946ef 100%);
+  background-size: 100% 100%;
+  background-position: center center;
+  &:hover {
+    background: linear-gradient(130deg, #b45309 0%, #d946ef 100%);
+    background-size: 100% 100%;
+    background-position: center center;
+
+    animation: 0.4s linear forwards global-button-2;
+  }
 }
 
 .global-button-gradient:hover {
@@ -269,6 +282,27 @@ body {
   50% {
     background-size: 400% 400%;
     background-position: 150% 300%;
+  }
+  100% {
+    background-size: 100% 100%;
+    background-position: bottom right;
+    filter: brightness(1);
+  }
+}
+
+@keyframes global-button-2 {
+  0% {
+    opacity: 0;
+    background-size: 100% 100%;
+    background-position: top left;
+    filter: brightness(2);
+  }
+  30% {
+    opacity: 1;
+  }
+  50% {
+    background-size: 400% 400%;
+    background-position: 150% 130%;
   }
   100% {
     background-size: 100% 100%;
