@@ -27,7 +27,6 @@ import {
   Zen_Dots,
 } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,8 +62,6 @@ export default function RootLayout({
         id="body"
         className={`relative ${geistSans.variable} ${geistMono.variable} ${googleFontAny.variable} antialiased`}
       >
-        {/* <Header /> */}
-
         {children}
       </body>
     </html>

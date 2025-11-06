@@ -1,14 +1,9 @@
 "use client";
 
 import { MotionValue } from "motion";
-import {
-  useMotionValue,
-  useMotionValueEvent,
-  useTransform,
-} from "motion/react";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { useTransform } from "motion/react";
+import React from "react";
 import { motion } from "motion/react";
-import { transferableAbortSignal } from "util";
 import { manaboardProjectData } from "@/data/manaboard-project-data";
 
 interface Props {
@@ -31,15 +26,11 @@ interface Props {
 export default function CubeFace({
   faceIndex,
   translateRotate,
-  currentFeatureTitle,
   className,
   mouseY,
-  mouseX,
-  switchFace,
   index,
   isCubeFaceClicked,
 }: Props) {
-  const roundedX = useTransform(mouseX, [300, 400], [0, 100]);
   const roundedY = useTransform(mouseY, [120, 500], [0, 100]);
   const currentFeature = manaboardProjectData[index];
 
@@ -48,7 +39,6 @@ export default function CubeFace({
       <motion.div
         whileHover={{
           margin: 2,
-          // backgroundColor: "red",
           transition: { duration: 0.2 },
         }}
         style={{
@@ -63,9 +53,6 @@ export default function CubeFace({
             : "bg-neutral-500/30"
         }`}
       >
-        {/* <h3 className="text-white scale-70">
-          {faceIndex === index && `Manaboard`}
-        </h3> */}
         <p className="text-white text-sm scale-70 text-wrap">
           {faceIndex === index && `${currentFeature.title}`}
         </p>

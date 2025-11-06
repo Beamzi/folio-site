@@ -2,8 +2,8 @@
 
 import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
-import { BiChevronsDown, BiChevronsUp, BiChevronUp } from "react-icons/bi";
-import { RefObject, useRef, useState } from "react";
+import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
+import { useState } from "react";
 import { motion } from "motion/react";
 import HeaderTopBar from "@/components/HeaderTopBar";
 
@@ -12,8 +12,6 @@ export default function Page() {
   const [initialScroll, setInitialScroll] = useState(false);
   const [mainAnim, setMainAnim] = useState(false);
   const [mainKey, setMainKey] = useState(123);
-
-  const mainRef = useRef<HTMLInputElement>(null);
 
   return (
     <motion.main className="overflow-hidden" key={mainKey}>
@@ -66,7 +64,7 @@ export default function Page() {
         )}
       </button>
 
-      {showFeatureSection && <FeatureSection initialScroll={initialScroll} />}
+      {showFeatureSection && <FeatureSection />}
     </motion.main>
   );
 }

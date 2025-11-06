@@ -1,14 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import React, { useState } from "react";
 import SingleFeature from "./SingleFeature";
 import { websitesData } from "@/data/websites-data";
 import AdditionalProjectList from "./AdditionalProjectList";
-
-interface Props {
-  initialScroll: boolean;
-}
 
 const getLists = (lists: number, items = 4) => {
   const arr = [];
@@ -24,17 +19,15 @@ const getLists = (lists: number, items = 4) => {
 
 const footerCopy = `Built with Next.js, React, powered by manic perfectionism ☕ © ${new Date().getFullYear()} James Day`;
 
-export default function FeatureSection({ initialScroll }: Props) {
+export default function FeatureSection() {
   const [expandSection, setExpandSection] = useState(true);
   const [activeSection, setActiveSection] = useState(10);
 
-  const [refreshKey, setRefreshKey] = useState(23242);
-
-  console.log(websitesData, "asdasd");
+  const [refreshKey] = useState(23242);
 
   return (
     <>
-      <article className=" flex border-1 flex-col items-center relative">
+      <article className="flex border-1 flex-col items-center relative">
         {websitesData.map((item, index) => {
           return (
             <SingleFeature
@@ -47,12 +40,10 @@ export default function FeatureSection({ initialScroll }: Props) {
               content={item.content}
               url={item.url}
               github={item.github}
-              // src={item.src}
               video={item.video}
               alt={item.alt}
               btnIndex={index}
               isScrollInEffect={true}
-              // id={`feature-${index}`}
               details={item.details}
             ></SingleFeature>
           );
@@ -69,7 +60,6 @@ export default function FeatureSection({ initialScroll }: Props) {
                 key={refreshKey + index}
                 title={item.title}
                 content={item.content}
-                // src={item.src}
                 alt={item.alt}
                 url={item.url}
                 github={item.github}

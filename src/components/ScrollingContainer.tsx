@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll } from "motion/react";
 import React, { useRef } from "react";
 
 interface Props {
@@ -39,14 +39,4 @@ export default function ScrollingContainer({
       ></img>
     </motion.div>
   );
-}
-
-{
-  /* <motion.div
-  initial={{ scale: 0.5 }}
-  whileInView={{ scale: 1 }}
-  exit={{ scale: 0 }}
-  transition={{ duration: 0.3 }}
-  viewport={{ amount: 0.8, margin: "-20%" }} // Triggers later, exits sooner
-></motion.div> */
 }

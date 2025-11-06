@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { LiaEnvelope, LiaGithub } from "react-icons/lia";
+import { LiaGithub } from "react-icons/lia";
 import { LuMail, LuPhone } from "react-icons/lu";
 import ContactModal from "./ContactModal";
 
@@ -11,7 +11,7 @@ export default function HeaderTopBar() {
     <header className="h-8 w-full fixed items-center align-middle top-0 left-0 bg-neutral-900 text-neutral-200 border-b-1 border-neutral-600 z-300  flex justify-between ">
       <p className="sm:hidden h-5 px-5">James Day</p>
       <p className="invisible sm:visible absolute sm:relative h-5 px-5">
-        James Day - Frontend Developer (Full-Stack Capable){" "}
+        James Day - Frontend Developer (Full-Stack Capable)
       </p>
       <div className="h-7 flex [&>*]:px-5  ">
         <button

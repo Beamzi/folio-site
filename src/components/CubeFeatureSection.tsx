@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion, useMotionValue, useTransform } from "motion/react";
+import React, { useState } from "react";
+import { motion } from "motion/react";
 import { SiGithub } from "react-icons/si";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { FaEnvelope } from "react-icons/fa";
@@ -31,29 +31,7 @@ export default function CubeFeatureSection({
   const [showImg, setShowImg] = useState(false);
   const [translateRight, setTranslateRight] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
-
-  // const [innerWidth1, setInnerWidth1] = useState(
-  //   typeof window !== "undefined" ? window.innerWidth * 0.7 * 0.71 : 1
-  // );
-
-  const innerWidth1 = useMotionValue(window.innerWidth * 0.7);
-
   const containerWidth = window.innerWidth * 0.8 * 0.715;
-
-  const tansform = useTransform(
-    innerWidth1,
-    (innerWidth1) => innerWidth1 * 0.71
-  );
-
-  // useEffect(() => {
-  //   const resize = () => {
-  //     setInnerWidth1(window.innerWidth * 0.7);
-  //   };
-  //   window.addEventListener("resize", resize);
-  //   console.log(innerWidth1);
-
-  //   return () => window.removeEventListener("resize", resize);
-  // }, []);
 
   return (
     <motion.div
@@ -70,7 +48,7 @@ export default function CubeFeatureSection({
               <h3 className="w-full px-2 py-1 text-lg break-word overflow-hidden h- text-ellipsis whitespace-normal border-b-1 pb-1 border-neutral-700">
                 {title}
               </h3>
-              <p className="px-2 py-1 w-full break-word text-ellipsis whitespace-normal border-b-1  mb-1 border-neutral-700">
+              <p className="px-2 py-1 w-full break-word text-ellipsis whitespace-normal border-b-1 mb-1 border-neutral-700">
                 {content}
               </p>
 

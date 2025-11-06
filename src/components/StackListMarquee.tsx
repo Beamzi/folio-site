@@ -14,7 +14,7 @@ import {
   SiCss3,
 } from "react-icons/si";
 
-export default function StackListMarquee({ topWidth }: { topWidth: number }) {
+export default function StackListMarquee() {
   const stackList = getStackData("placeholder");
   const itemWidth = 160;
   const totalWidth = itemWidth * (stackList.length * 2);
@@ -38,7 +38,7 @@ export default function StackListMarquee({ topWidth }: { topWidth: number }) {
 
 const getStackList = (itemWidth: number) => {
   const stackList = getStackData("w-5 h-5 mr-2 ");
-  let spanArray = [];
+  const spanArray = [];
   for (let i = 0; i < 2; i++) {
     const spanList = (
       <div key={i + 64} className="flex w-full">

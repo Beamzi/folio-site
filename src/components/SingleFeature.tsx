@@ -1,32 +1,17 @@
 "use client";
 
-import React, { SetStateAction, useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useMotionValue,
-  useMotionValueEvent,
-  useScroll,
-} from "motion/react";
-import { FaCheck, FaCheckCircle, FaCheckSquare } from "react-icons/fa";
+import React, { useRef } from "react";
+import { motion, useScroll } from "motion/react";
 import { LuAppWindow, LuCircleCheck, LuPhoneCall } from "react-icons/lu";
 export default function SingleFeature({
   title,
   content,
-  src,
   video,
-  src2,
-  alt,
-  btnIndex,
   url,
-  github,
   isScrollInEffect,
   className,
   id,
   details,
-  expandSection,
-  setExpandSection,
-  setActiveSection,
-  activeSection,
 }: {
   title: string;
   content: string;
@@ -46,21 +31,11 @@ export default function SingleFeature({
   setActiveSection: React.Dispatch<React.SetStateAction<number>>;
   activeSection: number;
 }) {
-  const [localExpandSection, setLocalExpandSection] = useState(false);
-
-  const [refreshRef, setRefreshRef] = useState(0);
-
-  const [localBtnIndex, setLocalBtnIndex] = useState(10);
-
   const ref = useRef<HTMLDivElement>(null);
-  const refNew = useRef(null);
-
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end end"],
   });
-
-  // useEffect(() => {}, [expandSection]);
 
   return (
     <motion.div

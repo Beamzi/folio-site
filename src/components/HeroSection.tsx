@@ -1,26 +1,10 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
 
-import { DiJsBadge } from "react-icons/di";
+import React, { useEffect, useState } from "react";
 import { manaboardProjectData } from "@/data/manaboard-project-data";
-
-import {
-  AnimatePresence,
-  easeInOut,
-  motion,
-  MotionValue,
-  useMotionTemplate,
-  useMotionValue,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 import CubeFace from "@/components/CubeFace";
-import { LiaTabletSolid } from "react-icons/lia";
-import { HiOutlineMagnifyingGlassCircle } from "react-icons/hi2";
-import { BiBrightness, BiChevronDown, BiChevronsDown } from "react-icons/bi";
 import StackListMarquee from "@/components/StackListMarquee";
-import SingleFeature from "./SingleFeature";
 import CubeFeatureSection from "./CubeFeatureSection";
 
 const faces = [
@@ -51,14 +35,11 @@ const staticValues = [
 ];
 
 export default function HeroSection() {
-  const topWidth = 80;
-  const topHeight = 80;
+  // const topWidth = 80;
   const [revealKey, setRevealKey] = useState(215);
   const [textKey, setTextKey] = useState(230);
   const [isCubeFaceClicked, setIsCubeFaceClicked] = useState(false);
   const [staticMousePosition, setStaticMousePosition] = useState([0, 0]);
-  const [isFaceMenuSticky, setIsFaceMenuSticky] = useState(false);
-  const [menuSpacerHidden, setMenuSpacerHidden] = useState("");
   const [switchFace, setSwitchFace] = useState(true);
   const [faceIndex, setFaceIndex] = useState(10);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -101,7 +82,6 @@ export default function HeroSection() {
   return (
     <>
       <section className="h-screen relative flex justify-center items-center">
-        {/* beware mt-8  */}
         <section
           // style={{ width: `${topWidth}%` }}
           className={`overflow-hidden whitespace-nowrap min-h-0 mt-8 sm:w-[80%] `}
@@ -121,7 +101,11 @@ export default function HeroSection() {
                 }}
                 className="flex justify-center items-center "
               >
-                <img src="/logo/2.svg" className="w-7 h-7 mx-1 "></img>
+                <img
+                  src="/logo/2.svg"
+                  className="w-7 h-7 mx-1 mr-2 "
+                  alt="Manaboard logo"
+                ></img>
                 <motion.h3 className="absolute invisible sm:visible sm:relative text-lg  w-full text-center">
                   Manaboard, My latest Project Showcase
                 </motion.h3>
@@ -136,12 +120,7 @@ export default function HeroSection() {
                 key={textKey}
                 animate={{
                   x: 520,
-                  boxShadow: [
-                    // "0px 0px 30px 5px red",
-                    "0px 0px 400px 5px red",
-                    "0px 0px 0px 0px red",
-                  ],
-                  // filter: ["brightness(10)", "brightness(1)"],
+                  boxShadow: ["0px 0px 400px 5px red", "0px 0px 0px 0px red"],
                   transition: { duration: 3 },
                 }}
                 className=" border-l-3  border-red-400  opacity-90 text-reveal-extra z-100 h-full -top-1 -right-0 absolute w-full "
@@ -154,18 +133,13 @@ export default function HeroSection() {
           </div>
 
           <motion.div
-            // style={{ x: marquee, color: marqueeColor }}
             animate={{ x: [0, "-50%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             className="w-full inline-flex relative -z-10 "
-          >
-            {/* {getLettersForMovement("I")} */}
-          </motion.div>
-          {/* problema area */}
+          ></motion.div>
           <motion.div
             style={{
               backgroundPosition: template,
-              // pointerEvents: isCubeFaceClicked ? "none" : "auto",
             }}
             className={`radial-background  w-full h-[70vh] flex-col min-h-0  -mt-5 outline-standard flex justify-center items-center relative`}
             onMouseMove={(e) => {
@@ -205,7 +179,6 @@ export default function HeroSection() {
                       borderColor: { delay: 0.8, duration: 0.8 },
                     },
                   }}
-                  // transition={{ delay: 0.3, duration: 0.5 }}
                   className={`size-40 bg-black border-1 px-20 border-white z-100 absolute ${
                     isCubeFaceClicked ? "opacity-0" : "opacity-1"
                   }`}
@@ -226,7 +199,6 @@ export default function HeroSection() {
             )}
 
             <motion.div
-              // key={`${faceIndex}-${isCubeFaceClicked}`} // Forces new animation on change
               animate={
                 isCubeFaceClicked
                   ? {
@@ -236,12 +208,7 @@ export default function HeroSection() {
                   : undefined
               }
               transition={{ duration: 0.6 }}
-              onWheel={(e) => {
-                // const current = wheelScale.get();
-                // const delta = e.deltaY / 2000;
-                // wheelScale.set(Math.max(0.2, Math.min(2, current + delta)));
-                // wheelUncap.set(e.deltaY);
-              }}
+              onWheel={() => {}}
               style={{
                 rotateX: isCubeFaceClicked ? staticMousePosition[0] : mouseX,
                 rotateY: isCubeFaceClicked ? staticMousePosition[1] : mouseY,
@@ -268,39 +235,12 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {isFaceMenuSticky && (
-            <motion.div
-              className={`min-h-8 border-1 ${menuSpacerHidden}`}
-            ></motion.div>
-          )}
-
           <motion.div
-            animate={
-              isFaceMenuSticky
-                ? {
-                    filter: ["blur(100px)", "blur(0px)"],
-                    translateX: [1000, 0],
-                    transition: {
-                      filter: { duration: 0.2 },
-                      translateX: { duration: 0.4 },
-                    },
-                  }
-                : undefined
-            }
-            className={` ${
-              isFaceMenuSticky &&
-              "fixed w-full top-0 z-1000 nav-back-light-shadow flex justify-between  items-center px-10"
-            } left-0 flex flex-row w-full gradient-for-thin-containers justify-center`}
+            className={`left-0 flex flex-row w-full gradient-for-thin-containers justify-center`}
           >
             {staticValues.map((item, index) => (
               <button
                 onClick={() => {
-                  // setIsFaceMenuSticky(true);
-                  // setTimeout(() => {
-                  //   setMenuSpacerHidden("hidden");
-                  // }, 1000);
-                  // const featureId = document.getElementById(`feature-${index}`);
-                  // featureId?.scrollIntoView({ behavior: "smooth" });
                   setFaceIndex(index);
                   setIsCubeFaceClicked(false);
                   setIsAnimating(false);
@@ -310,10 +250,6 @@ export default function HeroSection() {
                 }}
                 onMouseEnter={() => {
                   setFaceIndex(index);
-                }}
-                onMouseLeave={() => {
-                  // setIsCubeFaceClicked(false);
-                  // setFaceIndex(10);
                 }}
                 key={index}
                 className={`face-1 cursor-pointer hover:pr-10 px-2 global-button-gradient 
@@ -328,7 +264,7 @@ export default function HeroSection() {
             ))}
           </motion.div>
           <div>
-            <StackListMarquee topWidth={topWidth} />
+            <StackListMarquee />
           </div>
         </section>
       </section>
