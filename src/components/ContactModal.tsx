@@ -41,7 +41,7 @@ export default function ContactModal({
                     className="hover:text-amber-500"
                     href="mailto:james@daymedia.com.au"
                   >
-                    james@daymedia.com.au
+                    me@james-day.dev
                   </a>
                 </li>
               </ul>

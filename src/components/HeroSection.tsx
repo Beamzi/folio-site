@@ -6,6 +6,7 @@ import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 import CubeFace from "@/components/CubeFace";
 import StackListMarquee from "@/components/StackListMarquee";
 import CubeFeatureSection from "./CubeFeatureSection";
+import { MdOutlineAppRegistration } from "react-icons/md";
 
 const faces = [
   "translate-z-12 rotate-x-0",
@@ -58,6 +59,8 @@ export default function HeroSection() {
     typeof window !== "undefined" ? (window.innerHeight * 0.7) / 200 : 1
   );
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     const resize = () => {
       setInnerWidth((window.innerWidth * 0.7) / 200);
@@ -101,13 +104,14 @@ export default function HeroSection() {
                 }}
                 className="flex justify-center items-center "
               >
-                <img
+                {/* <img
                   src="/logo/2.svg"
                   className="w-7 h-7 mx-1 mr-2 "
                   alt="Manaboard logo"
-                ></img>
+                ></img> */}
+                <MdOutlineAppRegistration className="w-5 h-5 mr-2" />
                 <motion.h3 className="absolute invisible sm:visible sm:relative text-lg  w-full text-center">
-                  Manaboard, My latest Project Showcase
+                  Manaboard - A Full-Stack Workflow Management Platform
                 </motion.h3>
                 <motion.h3 className=" sm:hidden  text-lg  w-full text-center">
                   Manaboard
@@ -119,7 +123,7 @@ export default function HeroSection() {
               <motion.div
                 key={textKey}
                 animate={{
-                  x: 520,
+                  x: 600,
                   boxShadow: ["0px 0px 400px 5px red", "0px 0px 0px 0px red"],
                   transition: { duration: 3 },
                 }}
@@ -127,7 +131,8 @@ export default function HeroSection() {
               ></motion.div>
 
               <p className="invisible sm:visible sm:relative absolute tracking-normal   text-neutral-500 z-11 ">
-                Move your mouse within the space below
+                A real-time system for managing projects, tasks, and
+                collaborative workflows.
               </p>
             </div>
           </div>

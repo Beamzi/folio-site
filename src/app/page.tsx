@@ -3,15 +3,22 @@
 import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
 import { BiChevronsDown, BiChevronsUp } from "react-icons/bi";
-import { useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import HeaderTopBar from "@/components/HeaderTopBar";
+import { websitesData } from "@/data/websites-data";
 
 export default function Page() {
   const [showFeatureSection, setShowFeatureSection] = useState(false);
   const [initialScroll, setInitialScroll] = useState(false);
   const [mainAnim, setMainAnim] = useState(false);
   const [mainKey, setMainKey] = useState(123);
+
+  useEffect(() => {
+    const vid1 = document.createElement("video");
+    vid1.src = websitesData[0].video;
+    vid1.preload = "auto";
+  }, []);
 
   return (
     <motion.main className="overflow-hidden" key={mainKey}>

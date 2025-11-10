@@ -9,10 +9,17 @@ export default function HeaderTopBar() {
   const [showContactModal, setShowContactModal] = useState(false);
   return (
     <header className="h-8 w-full fixed items-center align-middle top-0 left-0 bg-neutral-900 text-neutral-200 border-b-1 border-neutral-600 z-300  flex justify-between ">
-      <p className="sm:hidden h-5 px-5">James Day</p>
-      <p className="invisible sm:visible absolute sm:relative h-5 px-5">
-        James Day - Frontend Developer (Full-Stack Capable)
-      </p>
+      <div className="flex justify-center items-center px-5">
+        <img
+          src="/logo/2.svg"
+          className="w-7 h-7 mx-1 mr-2 "
+          alt="Manaboard logo"
+        ></img>
+        <p className="sm:hidden h-5">James Day</p>
+        <p className="invisible sm:visible absolute sm:relative h-5">
+          James Day - Frontend Developer (Full-Stack Capable)
+        </p>
+      </div>
       <div className="h-7 flex [&>*]:px-5  ">
         <button
           onClick={() => setShowContactModal(true)}

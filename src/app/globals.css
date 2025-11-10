@@ -350,6 +350,17 @@ body {
   }
 }
 
+.expand-image-chevron {
+  transform: translateX(2px) scale(1.1);
+  animation: ease-in-out 0.5s infinite expand-image-chevron-anim;
+}
+
+@keyframes expand-image-chevron-anim {
+  50% {
+    transform: translateX(-4px);
+  }
+}
+
 /* .global-button-parent-12 {
     @apply group transition-all duration-300 global-button-gradient;
   }

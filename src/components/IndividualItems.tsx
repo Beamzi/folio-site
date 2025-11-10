@@ -10,6 +10,7 @@ interface Props {
 
 export default function IndividualItems({ item }: Props) {
   const [activeItem, setActiveItem] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   return (
     <li

@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { SiGithub } from "react-icons/si";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { FaEnvelope } from "react-icons/fa";
 import ContactModal from "./ContactModal";
 import { LuCircleCheck } from "react-icons/lu";
+
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 
 interface Props {
   title: string;
@@ -32,6 +34,13 @@ export default function CubeFeatureSection({
   const [translateRight, setTranslateRight] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   const containerWidth = window.innerWidth * 0.8 * 0.715;
+
+  useEffect(() => {
+    if (src) {
+      const img1 = new Image();
+      img1.src = src;
+    }
+  }, [src]);
 
   return (
     <motion.div
@@ -106,14 +115,14 @@ export default function CubeFeatureSection({
               setTranslateRight(!translateRight ? true : false);
             }, 300);
           }}
-          className={`flex  global-button-gradient-active-vertical cursor-pointer z-50 relative hover:[&>*]:scale-120 transition duration-300 w-10 align-middle items-center justify-center border-1  ${
+          className={`flex  global-button-gradient-active-vertical cursor-pointer z-50 relative hover:[&>*]:scale-120 transition duration-300 w-10 align-middle items-center justify-center border-1   ${
             showImg ? "mr-2 " : "ml-2 "
           }`}
         >
           {!showImg ? (
-            <BiChevronLeft className="w-5 h-5 border-1 z-10 transition duration-300 border-white" />
+            <AiOutlineDoubleLeft className="w-5 h-5  z-10 transition duration-300 border-white expand-image-chevron" />
           ) : (
-            <BiChevronRight className="w-5 h-5 border-1 z-10 transition duration-300 border-white" />
+            <AiOutlineDoubleRight className="w-5 h-5  z-10 transition duration-300 border-white expand-image-chevron " />
           )}
         </motion.button>
 
@@ -123,14 +132,14 @@ export default function CubeFeatureSection({
               x: translateRight ? -(containerWidth - 69.5) : 0,
             }}
             transition={{ duration: 0.1, ease: "easeIn" }}
-            className={`invisible sm:visible  absolute top-0 right-0 h-full  flex inset-shadow-sm global-button-gradient-active-vertical global-button-gradient z-40  cursor-pointer  hover:[&>*]:scale-120  transition duration-300 w-10 align-middle items-center justify-center border-1 ${
+            className={`invisible sm:visible  absolute top-0 right-0 h-full flex inset-shadow-sm global-button-gradient-active-vertical global-button-gradient z-40  cursor-pointer  hover:[&>*]:scale-120  transition duration-300 w-10 align-middle items-center justify-center border-1 ${
               showImg ? "mr-2 " : "ml-2 "
             }`}
           >
             {!showImg ? (
-              <BiChevronLeft className="w-5 h-5 border-1 z-10 transition duration-300 border-white" />
+              <AiOutlineDoubleLeft className="w-5 h-5  z-10 transition duration-300 border-white" />
             ) : (
-              <BiChevronRight className="w-5 h-5 border-1 z-10 transition duration-300 border-white" />
+              <AiOutlineDoubleRight className="w-5 h-5  z-10 transition duration-300 border-white" />
             )}
           </motion.button>
         )}
