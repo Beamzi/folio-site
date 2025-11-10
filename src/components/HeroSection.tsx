@@ -61,6 +61,9 @@ export default function HeroSection() {
 
   useEffect(() => {}, []);
 
+  const mouseXMotionCached = mouseX.get();
+  const mouseYMotionCached = mouseY.get();
+
   useEffect(() => {
     const resize = () => {
       setInnerWidth((window.innerWidth * 0.7) / 200);
@@ -148,16 +151,12 @@ export default function HeroSection() {
             }}
             className={`radial-background  w-full h-[70vh] flex-col min-h-0  -mt-5 outline-standard flex justify-center items-center relative`}
             onMouseMove={(e) => {
-              if (isCubeFaceClicked) {
-                console.log("should return early");
-                return;
-              }
-
               mouseY.set(e.clientY);
               mouseX.set(e.clientX);
             }}
             onMouseEnter={() => {
               setIsAnimating(false);
+              setFaceIndex(isCubeFaceClicked ? faceIndex : 10);
             }}
             onMouseLeave={() => {
               setIsAnimating(true);
@@ -207,12 +206,15 @@ export default function HeroSection() {
               animate={
                 isCubeFaceClicked
                   ? {
-                      rotateX: [mouseX.get(), staticMousePosition[0]],
-                      rotateY: [mouseY.get(), staticMousePosition[1]],
+                      rotateX: [mouseXMotionCached, staticMousePosition[0]],
+                      rotateY: [mouseYMotionCached, staticMousePosition[1]],
+                      transition: {
+                        rotateX: { duration: 0.6 },
+                        rotateY: { duration: 0.6 },
+                      },
                     }
                   : undefined
               }
-              transition={{ duration: 0.6 }}
               onWheel={() => {}}
               style={{
                 rotateX: isCubeFaceClicked ? staticMousePosition[0] : mouseX,
@@ -220,6 +222,8 @@ export default function HeroSection() {
                 scale: wheelScale,
               }}
               className={`relative scale-200 ${
+                isCubeFaceClicked ? "cube-face-parent" : ""
+              } ${
                 isAnimating ? "init-animation" : "scale-400"
               }   size-20 transform-3d rotate-x-45 rotate-y-45 `}
             >
@@ -260,6 +264,7 @@ export default function HeroSection() {
                 className={`face-1 cursor-pointer hover:pr-10 px-2 global-button-gradient 
                   transition-all w-1/6 duration-100 py-1 border-b-1 outline-standard border-l-1 ${
                     faceIndex === index &&
+                    isCubeFaceClicked &&
                     "global-button-gradient-active pr-10 px-2 "
                   } ${index === 5 && "border-r-1"}`}
               >

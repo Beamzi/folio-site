@@ -361,6 +361,17 @@ body {
   }
 }
 
+.cube-face-parent {
+  animation: ease-in linear cube-face-parent-anim;
+  /* animation-delay: 1ms; */
+}
+
+@keyframes cube-face-parent-anim {
+  100% {
+    opacity: 0;
+  }
+}
+
 /* .global-button-parent-12 {
     @apply group transition-all duration-300 global-button-gradient;
   }
