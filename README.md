@@ -12,7 +12,7 @@ A modern, interactive portfolio showcasing frontend development and UI/UX skills
 ## Features
 - Fully interactive 3D portfolio experience with smooth animations  
 - Custom reusable components and modular UI architecture  
-- Performance-optimized for fast load times and responsive design  
+- Performance-optimised for fast load times and responsive design  
 - Immersive animations built with Framer Motion for engaging user experience  
 
 ## Project Highlights
